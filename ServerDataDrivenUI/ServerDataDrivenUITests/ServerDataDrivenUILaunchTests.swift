@@ -1,13 +1,13 @@
 //
-//  Tests_iOSLaunchTests.swift
-//  Tests iOS
+//  ServerDataDrivenUILaunchTests.swift
+//  ServerDataDrivenUILaunchTests
 //
 //  Created by Vidhyadharan Mohanram on 29/05/22.
 //
 
 import XCTest
 
-class Tests_iOSLaunchTests: XCTestCase {
+class ServerDataDrivenUILaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
