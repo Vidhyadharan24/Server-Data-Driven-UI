@@ -14,20 +14,20 @@ class TitleSubtitleViewModel: UIBaseViewModel {
     }
     
     override func data() -> [String : AnyCodable] {
-        [serverKey: AnyCodable(title)]
+        [key: AnyCodable(title)]
     }
     
     @Published var title: String
     @Published var subtitles: [String]
 
-    init(serverKey: String,
+    init(key: String,
          rules: [ViewStateRule] = [],
          title: String,
          subtitles: [String]) {
         self.title = title
         self.subtitles = subtitles
         
-        super.init(serverKey: serverKey,
+        super.init(key: key,
                    rules: rules)
     }
 }

@@ -43,7 +43,7 @@ struct PhoneFieldView: View {
 struct PhoneFieldView_Previews: PreviewProvider {
     static var previews: some View {
         let countryCodes = ["+91", "+65"]
-        let viewModel = PhoneFieldViewModel(serverKey: "",
+        let viewModel = PhoneFieldViewModel(key: "",
                                             countryCodes: countryCodes,
                                             selectedCountryCode: countryCodes.first!)
         PhoneFieldView(viewModel: viewModel)

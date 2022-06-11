@@ -21,16 +21,16 @@ class TextFieldViewModel: UIBaseInputViewModel {
     }
     
     override func data() -> [String : AnyCodable] {
-        [serverKey: AnyCodable(text)]
+        [key: AnyCodable(text)]
     }
 
-    init(serverKey: String,
+    init(key: String,
          rules: [ViewStateRule] = [],
          validations: [Validation] = [],
          text: String) {
         self.text = text
 
-        super.init(serverKey: serverKey,
+        super.init(key: key,
                    rules: rules,
                    validations: validations)
                 

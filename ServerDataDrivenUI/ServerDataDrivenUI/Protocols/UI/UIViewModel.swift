@@ -10,7 +10,7 @@ import Combine
 import AnyCodable
 
 protocol UIViewModel: AnyObject {
-    var serverKey: String { get }
+    var key: String { get }
     var view: AnyView { get }
     
     var isHidden: Bool { get set }

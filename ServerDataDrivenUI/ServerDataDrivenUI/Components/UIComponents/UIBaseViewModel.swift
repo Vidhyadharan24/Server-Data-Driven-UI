@@ -11,7 +11,7 @@ import AnyCodable
 import SwiftUI
 
 class UIBaseViewModel: UIViewModel, ObservableObject {
-    var serverKey: String
+    var key: String
     
     var view: AnyView {
         AnyView(EmptyView())
@@ -28,9 +28,9 @@ class UIBaseViewModel: UIViewModel, ObservableObject {
     
     var cancellableSet = Set<AnyCancellable>()
     
-    init(serverKey: String,
+    init(key: String,
          rules: [ViewStateRule] = []) {
-        self.serverKey = serverKey
+        self.key = key
         self.viewStateRules = rules
     }
 }

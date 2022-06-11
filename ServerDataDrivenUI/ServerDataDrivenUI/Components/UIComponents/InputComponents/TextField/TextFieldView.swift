@@ -21,7 +21,7 @@ struct TextFieldView: View {
 
 struct TextView_Previews: PreviewProvider {
     static var previews: some View {
-        TextFieldView(viewModel: TextFieldViewModel(serverKey: "",
+        TextFieldView(viewModel: TextFieldViewModel(key: "",
                                                     text: ""))
     }
 }

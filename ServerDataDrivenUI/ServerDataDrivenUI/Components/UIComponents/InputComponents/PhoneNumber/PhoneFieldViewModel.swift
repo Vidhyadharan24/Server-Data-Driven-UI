@@ -23,12 +23,12 @@ class PhoneFieldViewModel: UIBaseInputViewModel {
     }
     
     override func data() -> [String : AnyCodable] {
-        [serverKey: AnyCodable(phoneNumber)]
+        [key: AnyCodable(phoneNumber)]
     }
         
     let countryCodes: [String]
 
-    init(serverKey: String,
+    init(key: String,
          rules: [ViewStateRule] = [],
          validations: [Validation] = [],
          countryCodes: [String],
@@ -38,7 +38,7 @@ class PhoneFieldViewModel: UIBaseInputViewModel {
         self.selectedCountryCode = selectedCountryCode
         self.phoneNumber = phoneNumber
 
-        super.init(serverKey: serverKey,
+        super.init(key: key,
                    rules: rules,
                    validations: validations)
         

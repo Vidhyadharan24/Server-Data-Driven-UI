@@ -18,16 +18,16 @@ class GenericViewModel: GenericViewModelProtocol {
     private var cancellableSet = Set<AnyCancellable>()
     
     init() {
-        let phoneFieldViewModel = PhoneFieldViewModel(serverKey: "phone_field",
+        let phoneFieldViewModel = PhoneFieldViewModel(key: "phone_field",
                                                       countryCodes: ["+91",
                                                                      "+65"],
                                                       selectedCountryCode: "+91")
-        let textFieldViewModel = TextFieldViewModel(serverKey: "otp_field",
+        let textFieldViewModel = TextFieldViewModel(key: "otp_field",
                                                     text: "")
         
-        let genericButton = GenericButtonViewModel(serverKey: "login_button",
+        let genericButton = GenericButtonViewModel(key: "login_button",
                                                    title: "Login")
-        let timerButton = TimerButtonViewModel(serverKey: "resend_otp_button",
+        let timerButton = TimerButtonViewModel(key: "resend_otp_button",
                                                title: "Resend OTP")
         
         uiViewModels = [phoneFieldViewModel,

@@ -25,7 +25,7 @@ struct TitleSubtitleView: View {
 
 struct TitleSubtitleView_Previews: PreviewProvider {
     static var previews: some View {
-        TitleSubtitleView(viewModel: TitleSubtitleViewModel(serverKey: "title_subtitle_view",
+        TitleSubtitleView(viewModel: TitleSubtitleViewModel(key: "title_subtitle_view",
                                                             title: "Title", subtitles: ["Subtitle 1",
                                                                                         "Subtitle 2"]))
     }

@@ -17,12 +17,12 @@ class GenericButtonViewModel: UIBaseViewModel {
     }
     
     override func data() -> [String : AnyCodable] {
-        [serverKey: AnyCodable(title)]
+        [key: AnyCodable(title)]
     }
 
     var isParentDisabled: Bool
     
-    init(serverKey: String,
+    init(key: String,
          rules: [ViewStateRule] = [],
          validations: [Validation] = [],
          title: String,
@@ -33,7 +33,7 @@ class GenericButtonViewModel: UIBaseViewModel {
         self.isParentDisabled = isDisabled
         self.action = action
         
-        super.init(serverKey: serverKey,
+        super.init(key: key,
                    rules: rules)
         
         self.isDisabled = isDisabled

@@ -27,12 +27,12 @@ class UIBaseInputViewModel: UIBaseViewModel, UIInputViewModel {
         return [:]
     }
         
-    init(serverKey: String,
+    init(key: String,
          rules: [ViewStateRule] = [],
          validations: [Validation] = []) {
         self.validations = validations
         
-        super.init(serverKey: serverKey,
+        super.init(key: key,
                    rules: rules)
     }
         

@@ -16,7 +16,7 @@ class TimerButtonViewModel: UIBaseViewModel {
     }
     
     override func data() -> [String : AnyCodable] {
-        [serverKey: AnyCodable(title)]
+        [key: AnyCodable(title)]
     }
         
     @Published private var timeRemaining = 0
@@ -25,13 +25,13 @@ class TimerButtonViewModel: UIBaseViewModel {
     
     private var buttonTitle: String
 
-    init(serverKey: String,
+    init(key: String,
          rules: [ViewStateRule] = [],
          title: String) {
         self.title = title
         self.buttonTitle = title
         
-        super.init(serverKey: serverKey,
+        super.init(key: key,
                    rules: rules)
     }
         

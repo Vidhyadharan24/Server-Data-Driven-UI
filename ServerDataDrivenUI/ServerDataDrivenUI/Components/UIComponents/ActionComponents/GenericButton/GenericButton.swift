@@ -27,7 +27,7 @@ struct GenericButton: View {
 
 struct GenericButton_Previews: PreviewProvider {
     static var previews: some View {
-        GenericButton(viewModel: GenericButtonViewModel(serverKey: "",
+        GenericButton(viewModel: GenericButtonViewModel(key: "",
                                                         title: "Button"))
     }
 }

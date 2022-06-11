@@ -12,7 +12,7 @@ struct TimerButton: View {
     @ObservedObject var viewModel: TimerButtonViewModel
     
     var body: some View {
-        let vm = GenericButtonViewModel(serverKey: viewModel.serverKey,
+        let vm = GenericButtonViewModel(key: viewModel.key,
                                         title: viewModel.title,
                                         isDisabled: viewModel.isDisabled) {
             viewModel.pressed()
@@ -25,7 +25,7 @@ struct TimerButton: View {
 
 struct TimerButton_Previews: PreviewProvider {
     static var previews: some View {
-        GenericButton(viewModel: GenericButtonViewModel(serverKey: "",
+        GenericButton(viewModel: GenericButtonViewModel(key: "",
                                                         title: "Resend OTP"))
     }
 }
