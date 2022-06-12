@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-
+import Combine
+                   
 struct GenericButton: View {
     @ObservedObject var viewModel: GenericButtonViewModel
     
@@ -38,11 +39,15 @@ struct GenericButton: View {
 struct GenericButton_Previews: PreviewProvider {
     static var previews: some View {
         let vm = GenericButtonViewModel(key: "",
-                                        title: "Button")
+                                        title: "Button",
+                                        notifyChange: ObservableObjectPublisher(),
+         performAction: PassthroughSubject<ViewAction, Never>())
         vm.isLoading = true
         return Group {
             GenericButton(viewModel: GenericButtonViewModel(key: "",
-                                                            title: "Button"))
+                                                            title: "Button",
+                                                            notifyChange: ObservableObjectPublisher(),
+                                                            performAction: PassthroughSubject<ViewAction, Never>()))
             GenericButton(viewModel: vm)
         }
     }

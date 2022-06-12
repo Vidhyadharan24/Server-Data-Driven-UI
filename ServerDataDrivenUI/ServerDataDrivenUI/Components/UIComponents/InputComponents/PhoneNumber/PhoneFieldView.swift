@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 let dropdownCornerRadius: CGFloat = 8
 
@@ -56,7 +57,9 @@ struct PhoneFieldView_Previews: PreviewProvider {
         let countryCodeData = ["+91": 10, "+65": 8]
         let viewModel = PhoneFieldViewModel(key: "",
                                             countryCodeData: countryCodeData,
-                                            selectedCountryCode: "+65")
+                                            selectedCountryCode: "+65",
+                                            notifyChange: ObservableObjectPublisher(),
+                                            performAction: PassthroughSubject<ViewAction, Never>())
         PhoneFieldView(viewModel: viewModel)
     }
 }

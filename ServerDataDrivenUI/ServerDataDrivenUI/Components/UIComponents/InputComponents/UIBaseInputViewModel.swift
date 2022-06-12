@@ -15,8 +15,8 @@ class UIBaseInputViewModel: UIBaseViewModel, UIInputViewModel {
     
     var validations: [Validation]
     
-    var isValid: Bool {
-        true
+    var isValid: String? {
+        self.validate(text: "")
     }
             
     override var view: AnyView {
@@ -25,10 +25,14 @@ class UIBaseInputViewModel: UIBaseViewModel, UIInputViewModel {
         
     init(key: String,
          rules: ViewStateRule? = nil,
-         validations: [Validation] = []) {
+         validations: [Validation] = [],
+         notifyChange: ObservableObjectPublisher,
+         performAction: PassthroughSubject<ViewAction, Never>) {
         self.validations = validations
         
         super.init(key: key,
-                   rules: rules)
+                   rules: rules,
+                   notifyChange: notifyChange,
+                   performAction: performAction)
     }
 }

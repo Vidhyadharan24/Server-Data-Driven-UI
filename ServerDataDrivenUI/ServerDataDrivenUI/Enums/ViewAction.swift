@@ -8,7 +8,13 @@
 import Foundation
 
 enum ViewAction {
-    case refresh
-    case displayPage
-    case apiCall
+    case refresh(String)
+    case displayPage(String)
+    case apiCall(String)
+    case validatedAPICall(String)
+}
+
+enum ViewActionError: Error {
+    case validationError
+    case apiError
 }

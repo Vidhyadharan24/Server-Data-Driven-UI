@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import AnyCodable
 
-class TimerButtonViewModel: UIBaseViewModel {
+class TimerButtonViewModel: UIBaseActionViewModel {
     @Published var title: String
     var action: (() -> Void)?
 
@@ -17,18 +17,15 @@ class TimerButtonViewModel: UIBaseViewModel {
         AnyView(TimerButton(viewModel: self))
     }
     
-    override var data: [String: AnyCodable] {
+    override var data: [String: [String: AnyCodable]] {
         if !isLoading {
-            return [key: AnyCodable(actionPerformed)]
+            return [key: ["action": AnyCodable(actionPerformed)]]
         } else {
-            return [key: AnyCodable(actionPerformed),
-                    "loading": true]
+            return [key: ["action": AnyCodable(actionPerformed)],
+                    "view": ["loading": true]]
         }
     }
     
-    @Published var isLoading: Bool = false
-    var actionPerformed: Bool = false
-
     let countDownDuration: Int
     @Published private var timeRemaining: Int = 0
     var timer: Publishers.Autoconnect<Timer.TimerPublisher>?
@@ -43,16 +40,17 @@ class TimerButtonViewModel: UIBaseViewModel {
          validations: [Validation] = [],
          title: String,
          countDownDuration: Int,
-         action: (() -> Void)? = nil) {
+         notifyChange: ObservableObjectPublisher,
+         performAction: PassthroughSubject<ViewAction, Never>) {
 
         self.title = title
         self.buttonTitle = title
         self.countDownDuration = countDownDuration
-        
-        self.action = action
-        
+                
         super.init(key: key,
-                   rules: rules)
+                   rules: rules,
+                   notifyChange: notifyChange,
+                   performAction: performAction)
         
         setUpBindings()
     }
@@ -63,25 +61,21 @@ class TimerButtonViewModel: UIBaseViewModel {
                 self?.buttonDisabled = isDisabled || timeRemaining > 0
             }
             .store(in: &cancellableSet)
-
     }
     
     func pressed() {
         self.hideKeyboard()
         
         self.isLoading = true
-        self.objectDidChange.send()
-        action?()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.isLoading = false
-            self.actionPerformed = true
-            self.objectDidChange.send()
-            self.showTimer()
-        }
+        self.performAction.send(.apiCall(key))
     }
     
-    func showTimer() {
+    override func actionCompleted(action: ViewAction, success: Bool) {
+        super.actionCompleted(action: action, success: success)
+        startTimer()
+    }
+    
+    func startTimer() {
         resetTimer()
         
         timeRemaining = countDownDuration
@@ -97,6 +91,8 @@ class TimerButtonViewModel: UIBaseViewModel {
                 self.timeRemaining -= 1
             } else {
                 self.title = self.buttonTitle
+                
+                self.resetTimer()
             }
         })
     }

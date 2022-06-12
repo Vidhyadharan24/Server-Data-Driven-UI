@@ -8,15 +8,20 @@
 import Foundation
 
 protocol Validator {
-    func validate() -> Bool
+    var uiViewModels: [UIViewModel] { get }
+    
+    func validate() -> String?
 }
 
 
 extension Validator {
-    func validate() -> Bool {
-//        for vm in uiViewModels {
-//            guard vm.isValid else { return false }
-//        }
-        return true
+    func validate() -> String? {
+        for vm in uiViewModels {
+            guard let inputVM = vm as? UIInputViewModel,
+                    !inputVM.isHidden,
+                    let error = inputVM.isValid else { continue }
+            return error
+        }
+        return nil
     }
 }

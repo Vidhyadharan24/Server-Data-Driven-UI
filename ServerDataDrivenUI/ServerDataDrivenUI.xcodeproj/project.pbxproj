@@ -26,6 +26,7 @@
 		1867151528556FB7001F5060 /* APIDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151428556FB7001F5060 /* APIDataProvider.swift */; };
 		186715192855AE88001F5060 /* GenericViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186715182855AE88001F5060 /* GenericViewProtocol.swift */; };
 		1867151B2855AED8001F5060 /* ViewAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151A2855AED8001F5060 /* ViewAction.swift */; };
+		1867151D28562904001F5060 /* UIBaseActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151C28562904001F5060 /* UIBaseActionViewModel.swift */; };
 		18B8C47828437CAE00B43C57 /* TextFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C47728437CAE00B43C57 /* TextFieldViewModel.swift */; };
 		18B8C47B28437CD400B43C57 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C47A28437CD400B43C57 /* TextFieldView.swift */; };
 		18B8C47E2843978600B43C57 /* PhoneFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C47D2843978600B43C57 /* PhoneFieldView.swift */; };
@@ -79,6 +80,7 @@
 		1867151428556FB7001F5060 /* APIDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataProvider.swift; sourceTree = "<group>"; };
 		186715182855AE88001F5060 /* GenericViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewProtocol.swift; sourceTree = "<group>"; };
 		1867151A2855AED8001F5060 /* ViewAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAction.swift; sourceTree = "<group>"; };
+		1867151C28562904001F5060 /* UIBaseActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBaseActionViewModel.swift; sourceTree = "<group>"; };
 		18B8C47728437CAE00B43C57 /* TextFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewModel.swift; sourceTree = "<group>"; };
 		18B8C47A28437CD400B43C57 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		18B8C47D2843978600B43C57 /* PhoneFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneFieldView.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			children = (
 				1862D1C2284369B400FADECC /* TimerButton */,
 				1862D1BD284359BF00FADECC /* GenericButton */,
+				1867151C28562904001F5060 /* UIBaseActionViewModel.swift */,
 			);
 			path = ActionComponents;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				1862D1A62843583800FADECC /* OTPLoginViewModel.swift in Sources */,
 				1867151128556AD5001F5060 /* UIActionViewModel.swift in Sources */,
 				18CB3D3A284BB9D400AE132F /* TimerButton.swift in Sources */,
+				1867151D28562904001F5060 /* UIBaseActionViewModel.swift in Sources */,
 				18CB3D4C284EE49F00AE132F /* UIBaseInputViewModel.swift in Sources */,
 				18CB3D39284BB9D200AE132F /* TimerButtonViewModel.swift in Sources */,
 				186715192855AE88001F5060 /* GenericViewProtocol.swift in Sources */,

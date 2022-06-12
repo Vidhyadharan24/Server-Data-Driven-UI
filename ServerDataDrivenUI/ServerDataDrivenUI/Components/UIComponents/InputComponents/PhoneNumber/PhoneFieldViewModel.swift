@@ -18,12 +18,12 @@ class PhoneFieldViewModel: UIBaseInputViewModel {
             .zIndex(100))
     }
 
-    override var isValid: Bool {
-        validate(text: phoneNumber) == nil
+    override var isValid: String? {
+        validatePhoneNo(text: phoneNumber)
     }
     
-    override var data: [String: AnyCodable] {
-        [key: AnyCodable(phoneNumber)]
+    override var data: [String: [String: AnyCodable]] {
+        [key: ["text": AnyCodable(phoneNumber)]]
     }
         
     let countryCodeData: [String: Int]
@@ -36,14 +36,18 @@ class PhoneFieldViewModel: UIBaseInputViewModel {
          validations: [Validation] = [],
          countryCodeData: [String: Int],
          selectedCountryCode: String,
-         phoneNumber: String = "") {
+         phoneNumber: String = "",
+         notifyChange: ObservableObjectPublisher,
+         performAction: PassthroughSubject<ViewAction, Never>) {
         self.countryCodeData = countryCodeData
         self.selectedCountryCode = selectedCountryCode
         self.phoneNumber = phoneNumber
 
         super.init(key: key,
                    rules: rules,
-                   validations: validations)
+                   validations: validations,
+                   notifyChange: notifyChange,
+                   performAction: performAction)
         
         self.setUpBindings()
     }
@@ -59,6 +63,7 @@ class PhoneFieldViewModel: UIBaseInputViewModel {
             .dropFirst()
             .sink {[weak self] text in
                 self?.validatePhoneNo(text: text)
+                self?.notifyChange.send()
             }.store(in: &cancellableSet)
     }
     

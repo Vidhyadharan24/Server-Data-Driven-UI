@@ -12,52 +12,65 @@ import AnyCodable
 class GenericViewModel: GenericViewModelProtocol {
     let uiViewModels: [UIViewModel]
     
+    let notifyChange = ObservableObjectPublisher()
+    var performAction = PassthroughSubject<ViewAction, Never>()
+
     private var cancellableSet = Set<AnyCancellable>()
     
     init() {
-        let phoneFieldRules = ViewStateRule(disableOn: ["loading": true])
+        let phoneFieldRules = ViewStateRule(disableOn: ["view": ["loading": true]])
         let phoneFieldViewModel = PhoneFieldViewModel(key: "phone_field",
                                                       rules: phoneFieldRules,
                                                       countryCodeData: ["+91": 10,
                                                                         "+65": 8],
-                                                      selectedCountryCode: "+91")
+                                                      selectedCountryCode: "+91",
+                                                      notifyChange: notifyChange,
+                                                      performAction: performAction)
         
         
-        let otpFieldRules = ViewStateRule(hideOn: ["send_otp" : false],
-                                          disableOn: ["loading" : true])
+        let otpFieldRules = ViewStateRule(hideOn: ["send_otp": ["action": false]],
+                                          disableOn: ["view": ["loading": true]])
         let minLength = Validation.min(LengthValidationData(length: 4,
                                                             errorMessage: "OTP should have min 4 chars in length"))
         let maxLength = Validation.max(LengthValidationData(length: 4,
                                                             errorMessage: "OTP should be max 4 chars in length"))
         let numbers = Validation.numbers(ValidationData(errorMessage: "OTP should contain only digits"))
-
+        
         let textFieldViewModel = TextFieldViewModel(key: "otp_field",
                                                     rules: otpFieldRules,
                                                     validations: [minLength,
-                                                                 maxLength,
-                                                                 numbers],
+                                                                  maxLength,
+                                                                  numbers],
                                                     text: "",
-                                                    placeholder: "Login OTP")
-
+                                                    placeholder: "Login OTP",
+                                                    notifyChange: notifyChange,
+                                                    performAction: performAction)
         
-        let sendOtpRule = ViewStateRule(hideOn: ["send_otp" : true],
-                                        disableOn: ["loading": true])
+        
+        let sendOtpRule = ViewStateRule(hideOn: ["send_otp": ["action": true]],
+                                        disableOn: ["view": ["loading": true]])
         let sendOTPButton = GenericButtonViewModel(key: "send_otp",
                                                    rules: sendOtpRule,
-                                                   title: "Send OTP")
+                                                   title: "Send OTP",
+                                                   notifyChange: notifyChange,
+                                                   performAction: performAction)
         
         
-        let otpRules = ViewStateRule(hideOn: ["send_otp" : false],
-                                     disableOn: ["loading" : true])
-
+        let otpRules = ViewStateRule(hideOn: ["send_otp": ["action": false]],
+                                     disableOn: ["view": ["loading": true]])
+        
         let verifyOTPButton = GenericButtonViewModel(key: "verify_otp",
                                                      rules: otpRules,
-                                                     title: "Verify OTP")
+                                                     title: "Verify OTP",
+                                                     notifyChange: notifyChange,
+                                                     performAction: performAction)
         
         let timerButton = TimerButtonViewModel(key: "resend_otp_button",
                                                rules: otpRules,
                                                title: "Resend OTP",
-                                               countDownDuration: 60)
+                                               countDownDuration: 60,
+                                               notifyChange: notifyChange,
+                                               performAction: performAction)
         
         uiViewModels = [phoneFieldViewModel,
                         textFieldViewModel,
@@ -65,18 +78,59 @@ class GenericViewModel: GenericViewModelProtocol {
                         verifyOTPButton,
                         timerButton]
         
-        for uiViewModel in uiViewModels {
-            uiViewModel.objectDidChange.sink { [weak self] in
-                self?.updateViewState()
-                self?.objectWillChange.send()
-            }.store(in: &cancellableSet)            
-        }
+        setUpBindings()
         
         updateViewState()
     }
     
+    func setUpBindings() {
+        notifyChange.sink { [weak self] _ in
+            self?.updateViewState()
+            self?.objectWillChange.send()
+        }.store(in: &cancellableSet)
+        
+        performAction.sink { [weak self] action in
+            switch action {
+            case .validatedAPICall(let key):
+                guard self?.validate() == nil else {
+                    self?.action(key: key,
+                                 action: action,
+                                 success: false)
+                    return
+                }
+                self?.apiCall(key: key,
+                              action: action)
+            case .apiCall(let key):
+                self?.apiCall(key: key,
+                              action: action)
+            default: break
+            }
+        }.store(in: &cancellableSet)
+    }
+    
+    func apiCall(key: String,
+                 action: ViewAction) {
+        updateViewState()
+        objectWillChange.send()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.action(key: key, action: action, success: true)
+        }
+    }
+    
+    func action(key: String,
+                action: ViewAction,
+                success: Bool) {
+        let vm: UIViewModel? = uiViewModels.filter { $0.key == key }.last
+        vm?.actionCompleted(action: action,
+                            success: success)
+        
+        updateViewState()
+        objectWillChange.send()
+    }
+    
     func updateViewState() {
-        var viewData = [String: AnyCodable]()
+        var viewData = [String: [String: AnyCodable]]()
         uiViewModels.forEach { viewModel in
             for (key, value) in viewModel.data {
                 viewData[key] = value

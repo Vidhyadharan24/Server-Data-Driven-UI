@@ -34,6 +34,8 @@ struct TextView_Previews: PreviewProvider {
     static var previews: some View {
         TextFieldView(viewModel: TextFieldViewModel(key: "",
                                                     text: "",
-                                                   placeholder: "Placeholder"))
+                                                    placeholder: "Placeholder",
+                                                    notifyChange: ObservableObjectPublisher(),
+                                                    performAction: PassthroughSubject<ViewAction, Never>()))
     }
 }

@@ -19,21 +19,31 @@ class UIBaseViewModel: UIViewModel, ObservableObject {
     
     @Published var isHidden: Bool = false
     @Published var isDisabled: Bool = false
-    
+    @Published var isLoading: Bool = false
+
     var viewStateRules: ViewStateRule?
     
-    var data: [String: AnyCodable] {
-        return [key: AnyCodable(nil)]
+    var data: [String: [String: AnyCodable]] {
+        return [key: [:]]
     }
-    
-    let objectDidChange = ObservableObjectPublisher()
+
+    let notifyChange: ObservableObjectPublisher
+    let performAction: PassthroughSubject<ViewAction, Never>
         
     var cancellableSet = Set<AnyCancellable>()
 
     init(key: String,
-         rules: ViewStateRule?) {
+         rules: ViewStateRule?,
+         notifyChange: ObservableObjectPublisher,
+         performAction: PassthroughSubject<ViewAction, Never>) {
         self.key = key
         self.viewStateRules = rules
+        self.notifyChange = notifyChange
+        self.performAction = performAction
+    }
+    
+    func actionCompleted(action: ViewAction, success: Bool) {
+        self.isLoading = false
     }
     
     func hideKeyboard() {

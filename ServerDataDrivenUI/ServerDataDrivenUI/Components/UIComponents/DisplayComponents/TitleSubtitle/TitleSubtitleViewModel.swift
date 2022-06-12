@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 import AnyCodable
 
 class TitleSubtitleViewModel: UIBaseViewModel {
@@ -13,8 +14,8 @@ class TitleSubtitleViewModel: UIBaseViewModel {
         AnyView(TitleSubtitleView(viewModel: self))
     }
     
-    override var data: [String: AnyCodable] {
-        [key: AnyCodable(title)]
+    override var data: [String: [String: AnyCodable]] {
+        [key: ["text": AnyCodable(title)]]
     }
     
     @Published var title: String
@@ -23,11 +24,15 @@ class TitleSubtitleViewModel: UIBaseViewModel {
     init(key: String,
          rules: ViewStateRule? = nil,
          title: String,
-         subtitles: [String]) {
+         subtitles: [String],
+         notifyChange: ObservableObjectPublisher,
+         performAction: PassthroughSubject<ViewAction, Never>) {
         self.title = title
         self.subtitles = subtitles
         
         super.init(key: key,
-                   rules: rules)
+                   rules: rules,
+                   notifyChange: notifyChange,
+                   performAction: performAction)
     }
 }

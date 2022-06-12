@@ -15,30 +15,37 @@ protocol UIViewModel: AnyObject {
     
     var isHidden: Bool { get set }
     var isDisabled: Bool { get set }
+    var isLoading: Bool { get set }
 
     var viewStateRules: ViewStateRule? { get }
 
-    var objectDidChange: ObservableObjectPublisher { get }
-    func updateState(currentValues: [String: AnyCodable])
+    var notifyChange: ObservableObjectPublisher { get }
+    var performAction: PassthroughSubject<ViewAction, Never> { get }
     
-    var data: [String: AnyCodable] { get }
+    func updateState(currentValues: [String: [String: AnyCodable]])
+    
+    var data: [String: [String: AnyCodable]] { get }
+    
+    func actionCompleted(action: ViewAction, success: Bool)
 }
 
 extension UIViewModel {
         
-    func updateState(currentValues: [String: AnyCodable]) {
+    func updateState(currentValues: [String: [String: AnyCodable]]) {
         if let hidingRules = viewStateRules?.hideOn {
-            for (name, value) in hidingRules {
-                let result = currentValues[name] == value
-                guard result != isHidden else { continue }
-                isHidden = result
+            for (viewName, viewRules) in hidingRules {
+                let viewStateData = currentValues[viewName]
+                for (stateName, value) in viewRules {
+                    isHidden = viewStateData?[stateName] == value
+                }
             }
         }
         if let disableOnRules = viewStateRules?.disableOn {
-            for (name, value) in disableOnRules {
-                let result = currentValues[name] == value
-                guard result != isDisabled else { continue }
-                isDisabled = result
+            for (viewName, viewRules) in disableOnRules {
+                let viewStateData = currentValues[viewName]
+                for (stateName, value) in viewRules {
+                    isDisabled = viewStateData?[stateName] == value
+                }
             }
         }
     }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct TimerButton: View {
     @ObservedObject var viewModel: TimerButtonViewModel
@@ -39,6 +40,8 @@ struct TimerButton: View {
 struct TimerButton_Previews: PreviewProvider {
     static var previews: some View {
         GenericButton(viewModel: GenericButtonViewModel(key: "",
-                                                        title: "Resend OTP"))
+                                                        title: "Resend OTP",
+                                                        notifyChange: ObservableObjectPublisher(),
+                                                        performAction: PassthroughSubject<ViewAction, Never>()))
     }
 }

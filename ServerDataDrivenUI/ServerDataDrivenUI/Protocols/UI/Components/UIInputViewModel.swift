@@ -16,7 +16,7 @@ protocol UIInputViewModel: UIViewModel, Validatable, APIDataProvider {
     var validations: [Validation] { get }
     var keyboardType: UIKeyboardType { get }
     
-    var isValid: Bool { get }
+    var isValid: String? { get }
 }
 
 extension UIInputViewModel {

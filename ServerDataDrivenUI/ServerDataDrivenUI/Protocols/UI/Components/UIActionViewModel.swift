@@ -8,5 +8,6 @@
 import Foundation
 import Combine
 
-protocol UIActionViewModel: UIViewModel, Validatable {
+protocol UIActionViewModel: UIViewModel {
+    var actionPerformed: Bool { get set }
 }

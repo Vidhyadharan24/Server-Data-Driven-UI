@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct TitleSubtitleView: View {
     @ObservedObject var viewModel: TitleSubtitleViewModel
@@ -29,6 +30,8 @@ struct TitleSubtitleView_Previews: PreviewProvider {
         TitleSubtitleView(viewModel: TitleSubtitleViewModel(key: "title_subtitle_view",
                                                             title: "Title",
                                                             subtitles: ["Subtitle 1",
-                                                                        "Subtitle 2"]))
+                                                                        "Subtitle 2"],
+                                                            notifyChange: ObservableObjectPublisher(),
+                                                            performAction: PassthroughSubject<ViewAction, Never>()))
     }
 }

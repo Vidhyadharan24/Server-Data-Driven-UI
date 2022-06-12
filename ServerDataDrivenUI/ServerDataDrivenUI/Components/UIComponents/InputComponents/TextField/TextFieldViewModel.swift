@@ -25,25 +25,29 @@ class TextFieldViewModel: UIBaseInputViewModel {
         }
     }
     
-    override var isValid: Bool {
-        validate(text: text) == nil
+    override var isValid: String? {
+        validate(text: text)
     }
     
-    override var data: [String: AnyCodable] {
-        [key: AnyCodable(text)]
+    override var data: [String: [String: AnyCodable]] {
+        [key: ["text": AnyCodable(text)]]
     }
 
     init(key: String,
          rules: ViewStateRule? = nil,
          validations: [Validation] = [],
          text: String,
-         placeholder: String) {
+         placeholder: String,
+         notifyChange: ObservableObjectPublisher,
+         performAction: PassthroughSubject<ViewAction, Never>) {
         self.text = text
         self.placeholder = placeholder
 
         super.init(key: key,
                    rules: rules,
-                   validations: validations)
+                   validations: validations,
+                   notifyChange: notifyChange,
+                   performAction: performAction)
                 
         self.setUpBindings()
     }
@@ -51,6 +55,7 @@ class TextFieldViewModel: UIBaseInputViewModel {
     func setUpBindings() {
         $text.sink { [weak self] text in
             self?.validate(text: text)
+            self?.notifyChange.send()
         }.store(in: &cancellableSet)
     }
 }
