@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import AnyCodable
 
-class TimerButtonViewModel: UIBaseActionViewModel {
+class TimerButtonViewModel: UIBaseViewModel {
     @Published var title: String
     var action: (() -> Void)?
 

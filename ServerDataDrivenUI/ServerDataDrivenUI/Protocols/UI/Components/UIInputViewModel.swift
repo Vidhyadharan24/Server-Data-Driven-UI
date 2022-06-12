@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import AnyCodable
 
-protocol UIInputViewModel: UIViewModel, Validatable, DataProvider {
+protocol UIInputViewModel: UIViewModel, Validatable, APIDataProvider {
     var errorMessage: String? { get set }
     
     var validations: [Validation] { get }

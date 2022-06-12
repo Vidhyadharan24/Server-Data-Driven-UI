@@ -9,10 +9,6 @@ import SwiftUI
 import Combine
 import AnyCodable
 
-protocol GenericViewModelProtocol: ObservableObject, Validator {    
-    var uiViewModels: [UIViewModel] { get }
-}
-
 class GenericViewModel: GenericViewModelProtocol {
     let uiViewModels: [UIViewModel]
     
@@ -73,7 +69,7 @@ class GenericViewModel: GenericViewModelProtocol {
             uiViewModel.objectDidChange.sink { [weak self] in
                 self?.updateViewState()
                 self?.objectWillChange.send()
-            }.store(in: &cancellableSet)
+            }.store(in: &cancellableSet)            
         }
         
         updateViewState()

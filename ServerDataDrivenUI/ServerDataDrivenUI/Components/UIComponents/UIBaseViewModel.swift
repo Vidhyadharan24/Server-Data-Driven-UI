@@ -35,4 +35,11 @@ class UIBaseViewModel: UIViewModel, ObservableObject {
         self.key = key
         self.viewStateRules = rules
     }
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                        to: nil,
+                                        from: nil,
+                                        for: nil)
+    }
 }

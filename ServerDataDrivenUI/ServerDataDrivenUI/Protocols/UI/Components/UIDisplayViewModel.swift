@@ -8,5 +8,5 @@
 import Foundation
 import AnyCodable
 
-protocol UIDisplayViewModel: UIViewModel, DataProvider {
+protocol UIDisplayViewModel: UIViewModel, APIDataProvider {
 }

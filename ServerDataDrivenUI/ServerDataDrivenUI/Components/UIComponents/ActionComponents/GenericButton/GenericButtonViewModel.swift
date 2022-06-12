@@ -8,7 +8,7 @@
 import SwiftUI
 import AnyCodable
 
-class GenericButtonViewModel: UIBaseActionViewModel {
+class GenericButtonViewModel: UIBaseViewModel {
     @Published var title: String
     var action: (() -> Void)?
 
