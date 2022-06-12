@@ -7,16 +7,14 @@
 
 import Foundation
 import UIKit
+import Combine
+import AnyCodable
 
-typealias ValidationFunction = (String) -> String?
-
-protocol UIInputViewModel: UIViewModel, Validatable {
-    var errorMessage: String? { get }
+protocol UIInputViewModel: UIViewModel, Validatable, DataProvider {
+    var errorMessage: String? { get set }
     
     var validations: [Validation] { get }
     var keyboardType: UIKeyboardType { get }
-    
-    func notifyChange(_ block: @escaping () -> Void)
     
     var isValid: Bool { get }
 }
@@ -34,9 +32,11 @@ extension UIInputViewModel {
     @discardableResult func validate(text: String) -> String? {
         for validation in validations {
             guard let errorMessage = validation.validationFunction(text) else { continue }
+            self.errorMessage = errorMessage
             return errorMessage
         }
         
+        errorMessage = nil
         return nil
     }
     

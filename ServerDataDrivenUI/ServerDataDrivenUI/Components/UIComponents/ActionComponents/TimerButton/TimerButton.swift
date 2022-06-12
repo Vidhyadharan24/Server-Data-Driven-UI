@@ -8,19 +8,32 @@
 import SwiftUI
 
 struct TimerButton: View {
-    
     @ObservedObject var viewModel: TimerButtonViewModel
-    
-    var body: some View {
-        let vm = GenericButtonViewModel(key: viewModel.key,
-                                        title: viewModel.title,
-                                        isDisabled: viewModel.isDisabled) {
-            viewModel.pressed()
-        }
         
-        GenericButton(viewModel: vm)
-            .disabled(viewModel.isDisabled)
+    var body: some View {
+        Button {
+            viewModel.pressed()
+        } label: {
+            if viewModel.isLoading {
+                ActivityIndicator(isAnimating: .constant(true),
+                                  style: .medium,
+                                  color: UIColor.white)
+                .foregroundColor(.white)
+            } else {
+                Text(viewModel.title)
+            }
+        }
+        .disabled(viewModel.buttonDisabled)
+        .foregroundColor(Color.white)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 12)
+        .padding(.horizontal, 15)
+        .background(
+            Capsule(style: .circular)
+                .fill(viewModel.buttonDisabled ? Color.gray : Color.blue)
+        )
     }
+    
 }
 
 struct TimerButton_Previews: PreviewProvider {

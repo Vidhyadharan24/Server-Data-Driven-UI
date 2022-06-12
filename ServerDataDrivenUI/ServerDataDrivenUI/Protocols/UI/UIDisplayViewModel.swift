@@ -6,7 +6,7 @@
 //
 
 import Foundation
+import AnyCodable
 
-protocol UIDisplayViewModel: UIViewModel {
-    
+protocol UIDisplayViewModel: UIViewModel, DataProvider {
 }

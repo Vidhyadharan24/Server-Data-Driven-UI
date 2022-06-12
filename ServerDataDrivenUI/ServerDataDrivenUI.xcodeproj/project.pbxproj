@@ -21,6 +21,10 @@
 		1862D1C928436AF500FADECC /* ViewStateRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862D1C828436AF500FADECC /* ViewStateRule.swift */; };
 		1862D1CD28436D8900FADECC /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862D1CC28436D8900FADECC /* APIEndpoint.swift */; };
 		1862D1D328437A0D00FADECC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1862D1D228437A0D00FADECC /* LaunchScreen.storyboard */; };
+		1867150F2854F1C1001F5060 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867150E2854F1C1001F5060 /* ActivityIndicator.swift */; };
+		1867151128556AD5001F5060 /* UIActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151028556AD5001F5060 /* UIActionViewModel.swift */; };
+		1867151328556B66001F5060 /* UIBaseActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151228556B66001F5060 /* UIBaseActionViewModel.swift */; };
+		1867151528556FB7001F5060 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151428556FB7001F5060 /* DataProvider.swift */; };
 		18B8C47828437CAE00B43C57 /* TextFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C47728437CAE00B43C57 /* TextFieldViewModel.swift */; };
 		18B8C47B28437CD400B43C57 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C47A28437CD400B43C57 /* TextFieldView.swift */; };
 		18B8C47E2843978600B43C57 /* PhoneFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C47D2843978600B43C57 /* PhoneFieldView.swift */; };
@@ -69,6 +73,10 @@
 		1862D1CC28436D8900FADECC /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		1862D1D12843782D00FADECC /* ServerDataDrivenUI--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ServerDataDrivenUI--iOS--Info.plist"; sourceTree = "<group>"; };
 		1862D1D228437A0D00FADECC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1867150E2854F1C1001F5060 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		1867151028556AD5001F5060 /* UIActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActionViewModel.swift; sourceTree = "<group>"; };
+		1867151228556B66001F5060 /* UIBaseActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBaseActionViewModel.swift; sourceTree = "<group>"; };
+		1867151428556FB7001F5060 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		18B8C47728437CAE00B43C57 /* TextFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewModel.swift; sourceTree = "<group>"; };
 		18B8C47A28437CD400B43C57 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		18B8C47D2843978600B43C57 /* PhoneFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneFieldView.swift; sourceTree = "<group>"; };
@@ -185,6 +193,7 @@
 			children = (
 				1862D1C2284369B400FADECC /* TimerButton */,
 				1862D1BD284359BF00FADECC /* GenericButton */,
+				1867151228556B66001F5060 /* UIBaseActionViewModel.swift */,
 			);
 			path = ActionComponents;
 			sourceTree = "<group>";
@@ -291,6 +300,8 @@
 				18B8C483284397BA00B43C57 /* UIViewModel.swift */,
 				18CB3D44284D020400AE132F /* UIDisplayViewModel.swift */,
 				18CB3D46284D021400AE132F /* UIInputViewModel.swift */,
+				1867151028556AD5001F5060 /* UIActionViewModel.swift */,
+				1867151428556FB7001F5060 /* DataProvider.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -308,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				1862D1BA2843596300FADECC /* Dropdown */,
+				1867150E2854F1C1001F5060 /* ActivityIndicator.swift */,
 			);
 			path = Generic;
 			sourceTree = "<group>";
@@ -372,7 +384,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					1862D16F284345E700FADECC = {
 						CreatedOnToolsVersion = 13.4;
@@ -429,10 +441,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1867151528556FB7001F5060 /* DataProvider.swift in Sources */,
 				1862D193284345E700FADECC /* GenericView.swift in Sources */,
 				18B8C484284397BA00B43C57 /* UIViewModel.swift in Sources */,
 				18CB3D47284D021400AE132F /* UIInputViewModel.swift in Sources */,
 				18B8C4812843979900B43C57 /* PhoneFieldViewModel.swift in Sources */,
+				1867150F2854F1C1001F5060 /* ActivityIndicator.swift in Sources */,
 				18CB3D33284B6F5500AE132F /* GenericButton.swift in Sources */,
 				1862D1CD28436D8900FADECC /* APIEndpoint.swift in Sources */,
 				1862D1B0284358D600FADECC /* Validatable.swift in Sources */,
@@ -447,11 +461,13 @@
 				18B8C487284399A600B43C57 /* GenericViewModel.swift in Sources */,
 				18CB3D5528501FB100AE132F /* TitleSubtitleViewModel.swift in Sources */,
 				18B8C47828437CAE00B43C57 /* TextFieldViewModel.swift in Sources */,
+				1867151328556B66001F5060 /* UIBaseActionViewModel.swift in Sources */,
 				1862D1B3284358E900FADECC /* Validator.swift in Sources */,
 				18B8C48C2845454100B43C57 /* Dropdown.swift in Sources */,
 				1862D191284345E700FADECC /* ServerDataDrivenUIMain.swift in Sources */,
 				1862D1C928436AF500FADECC /* ViewStateRule.swift in Sources */,
 				1862D1A62843583800FADECC /* OTPLoginViewModel.swift in Sources */,
+				1867151128556AD5001F5060 /* UIActionViewModel.swift in Sources */,
 				18CB3D3A284BB9D400AE132F /* TimerButton.swift in Sources */,
 				18CB3D4C284EE49F00AE132F /* UIBaseInputViewModel.swift in Sources */,
 				18CB3D39284BB9D200AE132F /* TimerButtonViewModel.swift in Sources */,
@@ -512,6 +528,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -571,6 +588,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

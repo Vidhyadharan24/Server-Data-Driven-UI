@@ -20,16 +20,18 @@ class UIBaseViewModel: UIViewModel, ObservableObject {
     @Published var isHidden: Bool = false
     @Published var isDisabled: Bool = false
     
-    var viewStateRules: [ViewStateRule]
+    var viewStateRules: ViewStateRule?
     
-    func data() -> [String : AnyCodable] {
-        return [:]
+    var data: [String: AnyCodable] {
+        return [key: AnyCodable(nil)]
     }
     
+    let objectDidChange = ObservableObjectPublisher()
+        
     var cancellableSet = Set<AnyCancellable>()
-    
+
     init(key: String,
-         rules: [ViewStateRule] = []) {
+         rules: ViewStateRule?) {
         self.key = key
         self.viewStateRules = rules
     }

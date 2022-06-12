@@ -12,7 +12,8 @@ struct TitleSubtitleView: View {
     
     var body: some View {
         HStack {
-            VStack(spacing: 8) {
+            VStack(alignment: .leading,
+                   spacing: 8) {
                 Text(viewModel.title)
                 ForEach(viewModel.subtitles, id:\.self) { text in
                     Text(text)
@@ -26,7 +27,8 @@ struct TitleSubtitleView: View {
 struct TitleSubtitleView_Previews: PreviewProvider {
     static var previews: some View {
         TitleSubtitleView(viewModel: TitleSubtitleViewModel(key: "title_subtitle_view",
-                                                            title: "Title", subtitles: ["Subtitle 1",
-                                                                                        "Subtitle 2"]))
+                                                            title: "Title",
+                                                            subtitles: ["Subtitle 1",
+                                                                        "Subtitle 2"]))
     }
 }

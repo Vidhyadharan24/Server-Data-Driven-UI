@@ -22,19 +22,22 @@ class PhoneFieldViewModel: UIBaseInputViewModel {
         validate(text: phoneNumber) == nil
     }
     
-    override func data() -> [String : AnyCodable] {
+    override var data: [String: AnyCodable] {
         [key: AnyCodable(phoneNumber)]
     }
         
-    let countryCodes: [String]
+    let countryCodeData: [String: Int]
+    var countryCodes: [String] {
+        Array(countryCodeData.keys)
+    }
 
     init(key: String,
-         rules: [ViewStateRule] = [],
+         rules: ViewStateRule? = nil,
          validations: [Validation] = [],
-         countryCodes: [String],
+         countryCodeData: [String: Int],
          selectedCountryCode: String,
          phoneNumber: String = "") {
-        self.countryCodes = countryCodes
+        self.countryCodeData = countryCodeData
         self.selectedCountryCode = selectedCountryCode
         self.phoneNumber = phoneNumber
 
@@ -53,9 +56,22 @@ class PhoneFieldViewModel: UIBaseInputViewModel {
             }.store(in: &cancellableSet)
         
         $phoneNumber
+            .dropFirst()
             .sink {[weak self] text in
-                self?.validate(text: text)
+                self?.validatePhoneNo(text: text)
             }.store(in: &cancellableSet)
+    }
+    
+    @discardableResult func validatePhoneNo(text: String) -> String? {
+        if let phoneTextCount = countryCodeData[self.selectedCountryCode],
+            text.count != phoneTextCount {
+            let errorMessage = "Phone number should be \(phoneTextCount) chars long"
+            
+            self.errorMessage = errorMessage
+            return errorMessage
+        }
+
+        return self.validate(text: text)
     }
     
 }

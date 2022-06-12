@@ -16,26 +16,29 @@ protocol UIViewModel: AnyObject {
     var isHidden: Bool { get set }
     var isDisabled: Bool { get set }
 
-    var viewStateRules: [ViewStateRule] { get }
+    var viewStateRules: ViewStateRule? { get }
 
+    var objectDidChange: ObservableObjectPublisher { get }
     func updateState(currentValues: [String: AnyCodable])
     
-    func data() -> [String: AnyCodable]
+    var data: [String: AnyCodable] { get }
 }
 
 extension UIViewModel {
         
     func updateState(currentValues: [String: AnyCodable]) {
-        for viewStateRule in viewStateRules {
-            if let hidingRules = viewStateRule.hideOn {
-                for (name, value) in hidingRules {
-                    isHidden = currentValues[name] == value
-                }
+        if let hidingRules = viewStateRules?.hideOn {
+            for (name, value) in hidingRules {
+                let result = currentValues[name] == value
+                guard result != isHidden else { continue }
+                isHidden = result
             }
-            if let disableOnRules = viewStateRule.disableOn {
-                for (name, value) in disableOnRules {
-                    isDisabled = currentValues[name] == value
-                }
+        }
+        if let disableOnRules = viewStateRules?.disableOn {
+            for (name, value) in disableOnRules {
+                let result = currentValues[name] == value
+                guard result != isDisabled else { continue }
+                isDisabled = result
             }
         }
     }

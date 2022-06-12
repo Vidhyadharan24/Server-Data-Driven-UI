@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+typealias ValidationFunction = (String) -> String?
+
 enum Validation: Codable {
     case nonEmpty(ValidationData)
     case min(LengthValidationData)
@@ -86,12 +88,12 @@ struct ValidationFunctions {
     
     static func min(text: String,
                          validationData: LengthValidationData) -> String? {
-        return text.count >= validationData.length ? validationData.errorMessage : nil
+        return text.count < validationData.length ? validationData.errorMessage : nil
     }
     
     static func max(text: String,
                          validationData: LengthValidationData) -> String? {
-        return text.count <= validationData.length ? validationData.errorMessage : nil
+        return text.count > validationData.length ? validationData.errorMessage : nil
     }
     
     static func numbers(text: String,

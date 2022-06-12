@@ -15,37 +15,48 @@ struct PhoneFieldView: View {
     @State var showDropdown = false
     
     var body: some View {
-        HStack {
-            Button(action: {
-                if viewModel.countryCodes.count > 1 {
-                    self.showDropdown.toggle()
-                }
-            }) {
-                HStack {
-                    Text(viewModel.selectedCountryCode)
+        VStack(alignment: .leading) {
+            HStack {
+                Button(action: {
                     if viewModel.countryCodes.count > 1 {
-                        Image(systemName: self.showDropdown ? "chevron.up" : "chevron.down")
+                        self.showDropdown.toggle()
+                    }
+                }) {
+                    HStack {
+                        Text(viewModel.selectedCountryCode)
+                        if viewModel.countryCodes.count > 1 {
+                            Image(systemName: self.showDropdown ? "chevron.up" : "chevron.down")
+                        }
                     }
                 }
+                .disabled(viewModel.isDisabled)
+                .foregroundColor(viewModel.isDisabled ? Color.gray : Color.black)
+                .padding(.vertical, 12)
+                .dropdown(showDropdown: $showDropdown,
+                          selected: $viewModel.selectedCountryCode,
+                          options: viewModel.countryCodes)
+                TextField("Phone Number", text: $viewModel.phoneNumber)
+                    .foregroundColor(viewModel.isDisabled ? Color.gray : Color.black)
+                    .keyboardType(.phonePad)
+                    .disabled(viewModel.isDisabled)
+                Spacer()
             }
-            .foregroundColor(Color.black)
-            .padding(.vertical, 12)
-            .dropdown(showDropdown: $showDropdown,
-                      selected: $viewModel.selectedCountryCode,
-                      options: viewModel.countryCodes)
-            TextField("Phone Number", text: $viewModel.phoneNumber)
-                .keyboardType(.phonePad)
-            Spacer()
+            if let msg = viewModel.errorMessage {
+                Divider()
+                Text(msg)
+                    .font(.caption)
+                    .foregroundColor(.red)
+            }
         }
     }
 }
 
 struct PhoneFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        let countryCodes = ["+91", "+65"]
+        let countryCodeData = ["+91": 10, "+65": 8]
         let viewModel = PhoneFieldViewModel(key: "",
-                                            countryCodes: countryCodes,
-                                            selectedCountryCode: countryCodes.first!)
+                                            countryCodeData: countryCodeData,
+                                            selectedCountryCode: "+65")
         PhoneFieldView(viewModel: viewModel)
     }
 }

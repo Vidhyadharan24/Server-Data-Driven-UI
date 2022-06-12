@@ -8,7 +8,7 @@
 import SwiftUI
 import AnyCodable
 
-class GenericButtonViewModel: UIBaseViewModel {
+class GenericButtonViewModel: UIBaseActionViewModel {
     @Published var title: String
     var action: (() -> Void)?
 
@@ -16,34 +16,43 @@ class GenericButtonViewModel: UIBaseViewModel {
         AnyView(GenericButton(viewModel: self))
     }
     
-    override func data() -> [String : AnyCodable] {
-        [key: AnyCodable(title)]
+    override var data: [String: AnyCodable] {
+        if !isLoading {
+            return [key: AnyCodable(actionPerformed)]
+        } else {
+            return [key: AnyCodable(actionPerformed),
+                    "loading": true]
+        }
     }
-
-    var isParentDisabled: Bool
+    
+    @Published var isLoading: Bool = false
+    var actionPerformed: Bool = false
     
     init(key: String,
-         rules: [ViewStateRule] = [],
+         rules: ViewStateRule? = nil,
          validations: [Validation] = [],
          title: String,
-         isDisabled: Bool = false,
          action: (() -> Void)? = nil) {
 
         self.title = title
-        self.isParentDisabled = isDisabled
+        
         self.action = action
         
         super.init(key: key,
                    rules: rules)
-        
-        self.isDisabled = isDisabled
     }
     
     func pressed() {
-        if let action = action {
-            action()
-        } else {
-            // run code
+        self.hideKeyboard()
+        
+        self.isLoading = true
+        self.objectDidChange.send()
+        action?()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.isLoading = false
+            self.actionPerformed = true
+            self.objectDidChange.send()
         }
     }
 }

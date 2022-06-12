@@ -12,23 +12,34 @@ import AnyCodable
 class TextFieldViewModel: UIBaseInputViewModel {
     @Published var text: String
     
+    var placeholder: String
+    
     override var view: AnyView {
         AnyView(TextFieldView(viewModel: self))
+    }
+    
+    override var isHidden: Bool {
+        didSet {
+            guard isHidden, !oldValue else { return }
+            self.text = ""
+        }
     }
     
     override var isValid: Bool {
         validate(text: text) == nil
     }
     
-    override func data() -> [String : AnyCodable] {
+    override var data: [String: AnyCodable] {
         [key: AnyCodable(text)]
     }
 
     init(key: String,
-         rules: [ViewStateRule] = [],
+         rules: ViewStateRule? = nil,
          validations: [Validation] = [],
-         text: String) {
+         text: String,
+         placeholder: String) {
         self.text = text
+        self.placeholder = placeholder
 
         super.init(key: key,
                    rules: rules,

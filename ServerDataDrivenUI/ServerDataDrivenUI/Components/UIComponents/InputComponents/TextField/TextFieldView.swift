@@ -13,15 +13,27 @@ struct TextFieldView: View {
     @ObservedObject var viewModel: TextFieldViewModel
     
     var body: some View {
-        TextField("text", text: $viewModel.text)
-            .keyboardType(viewModel.keyboardType)
-            .padding(.vertical, 11)
+        VStack(alignment: .leading) {
+            TextField(viewModel.placeholder,
+                      text: $viewModel.text)
+                .foregroundColor(viewModel.isDisabled ? Color.gray : Color.black)
+                .disabled(viewModel.isDisabled)
+                .keyboardType(viewModel.keyboardType)
+                .padding(.vertical, 11)
+            if let msg = viewModel.errorMessage {
+                Divider()
+                Text(msg)
+                    .font(.caption)
+                    .foregroundColor(.red)
+            }
+        }
     }
 }
 
 struct TextView_Previews: PreviewProvider {
     static var previews: some View {
         TextFieldView(viewModel: TextFieldViewModel(key: "",
-                                                    text: ""))
+                                                    text: "",
+                                                   placeholder: "Placeholder"))
     }
 }

@@ -11,9 +11,19 @@ struct GenericButton: View {
     @ObservedObject var viewModel: GenericButtonViewModel
     
     var body: some View {
-        Button(viewModel.title) {
+        Button {
             viewModel.pressed()
+        } label: {
+            if viewModel.isLoading {
+                ActivityIndicator(isAnimating: .constant(true),
+                                  style: .medium,
+                                  color: UIColor.white)
+                .foregroundColor(.white)
+            } else {
+                Text(viewModel.title)
+            }
         }
+        .disabled(viewModel.isDisabled)
         .foregroundColor(Color.white)
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
@@ -27,7 +37,13 @@ struct GenericButton: View {
 
 struct GenericButton_Previews: PreviewProvider {
     static var previews: some View {
-        GenericButton(viewModel: GenericButtonViewModel(key: "",
-                                                        title: "Button"))
+        let vm = GenericButtonViewModel(key: "",
+                                        title: "Button")
+        vm.isLoading = true
+        return Group {
+            GenericButton(viewModel: GenericButtonViewModel(key: "",
+                                                            title: "Button"))
+            GenericButton(viewModel: vm)
+        }
     }
 }
