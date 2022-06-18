@@ -1,5 +1,5 @@
 //
-//  TimerButtonViewModel.swift
+//  TimerButtonComponentModel.swift
 //  ServerDataDrivenUI (iOS)
 //
 //  Created by Vidhyadharan Mohanram on 04/06/22.
@@ -9,12 +9,12 @@ import SwiftUI
 import Combine
 import AnyCodable
 
-class TimerButtonViewModel: UIBaseActionViewModel {
+class TimerButtonComponentModel: UIBaseActionComponentModel {
     @Published var title: String
     var action: (() -> Void)?
 
     override var view: AnyView {
-        AnyView(TimerButton(viewModel: self))
+        AnyView(TimerButtonComponent(componentModel: self))
     }
     
     override var data: [String: Set<AnyCodable>] {
@@ -36,12 +36,12 @@ class TimerButtonViewModel: UIBaseActionViewModel {
     private var buttonTitle: String
 
     init(key: String,
-         rules: ViewStateRule? = nil,
+         rules: ComponentStateRule? = nil,
          validations: [Validation] = [],
          title: String,
          countDownDuration: Int,
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ViewAction, Never>) {
+         performAction: PassthroughSubject<ComponentAction, Never>) {
 
         self.title = title
         self.buttonTitle = title
@@ -70,7 +70,7 @@ class TimerButtonViewModel: UIBaseActionViewModel {
         self.performAction.send(.apiCall(key))
     }
     
-    override func actionCompleted(action: ViewAction, success: Bool) {
+    override func actionCompleted(action: ComponentAction, success: Bool) {
         super.actionCompleted(action: action, success: success)
         startTimer()
     }

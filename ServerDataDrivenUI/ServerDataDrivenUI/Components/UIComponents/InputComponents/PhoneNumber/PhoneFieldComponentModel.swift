@@ -1,5 +1,5 @@
 //
-//  PhoneFieldViewModel.swift
+//  PhoneFieldComponentModel.swift
 //  ServerDataDrivenUI
 //
 //  Created by Vidhyadharan Mohanram on 29/05/22.
@@ -9,12 +9,12 @@ import SwiftUI
 import Combine
 import AnyCodable
 
-class PhoneFieldViewModel: UIBaseInputViewModel {
+class PhoneFieldComponentModel: UIBaseInputComponentModel {
     @Published var selectedCountryCode: String
     @Published var phoneNumber: String
 
     override var view: AnyView {
-        AnyView(PhoneFieldView(viewModel: self)
+        AnyView(PhoneFieldComponent(componentModel: self)
             .zIndex(100))
     }
 
@@ -32,13 +32,13 @@ class PhoneFieldViewModel: UIBaseInputViewModel {
     }
 
     init(key: String,
-         rules: ViewStateRule? = nil,
+         rules: ComponentStateRule? = nil,
          validations: [Validation] = [],
          countryCodeData: [String: Int],
          selectedCountryCode: String,
          phoneNumber: String = "",
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ViewAction, Never>) {
+         performAction: PassthroughSubject<ComponentAction, Never>) {
         self.countryCodeData = countryCodeData
         self.selectedCountryCode = selectedCountryCode
         self.phoneNumber = phoneNumber

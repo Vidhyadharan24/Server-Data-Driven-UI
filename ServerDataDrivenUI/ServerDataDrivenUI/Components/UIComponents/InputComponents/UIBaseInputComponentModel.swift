@@ -1,5 +1,5 @@
 //
-//  UIBaseInputViewModel.swift
+//  UIBaseInputComponentModel.swift
 //  ServerDataDrivenUI (iOS)
 //
 //  Created by Vidhyadharan Mohanram on 07/06/22.
@@ -10,7 +10,7 @@ import Combine
 import AnyCodable
 import SwiftUI
 
-class UIBaseInputViewModel: UIBaseViewModel, UIInputViewModel {        
+class UIBaseInputComponentModel: UIBaseComponentModel, UIInputComponentModel {        
     var errorMessage: String?
     
     var validations: [Validation]
@@ -24,10 +24,10 @@ class UIBaseInputViewModel: UIBaseViewModel, UIInputViewModel {
     }
         
     init(key: String,
-         rules: ViewStateRule? = nil,
+         rules: ComponentStateRule? = nil,
          validations: [Validation] = [],
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ViewAction, Never>) {
+         performAction: PassthroughSubject<ComponentAction, Never>) {
         self.validations = validations
         
         super.init(key: key,

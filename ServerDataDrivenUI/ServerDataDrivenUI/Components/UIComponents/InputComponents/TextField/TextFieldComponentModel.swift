@@ -1,5 +1,5 @@
 //
-//  TextFieldViewModel.swift
+//  TextFieldComponentModel.swift
 //  ServerDataDrivenUI
 //
 //  Created by Vidhyadharan Mohanram on 29/05/22.
@@ -9,13 +9,13 @@ import SwiftUI
 import Combine
 import AnyCodable
 
-class TextFieldViewModel: UIBaseInputViewModel {
+class TextFieldComponentModel: UIBaseInputComponentModel {
     @Published var text: String
     
     var placeholder: String
     
     override var view: AnyView {
-        AnyView(TextFieldView(viewModel: self))
+        AnyView(TextFieldComponent(componentModel: self))
     }
     
     override var isHidden: Bool {
@@ -34,12 +34,12 @@ class TextFieldViewModel: UIBaseInputViewModel {
     }
 
     init(key: String,
-         rules: ViewStateRule? = nil,
+         rules: ComponentStateRule? = nil,
          validations: [Validation] = [],
          text: String,
          placeholder: String,
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ViewAction, Never>) {
+         performAction: PassthroughSubject<ComponentAction, Never>) {
         self.text = text
         self.placeholder = placeholder
 

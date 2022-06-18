@@ -1,5 +1,5 @@
 //
-//  TitleSubtitleViewModel.swift
+//  TitleSubtitleComponentModel.swift
 //  ServerDataDrivenUI (iOS)
 //
 //  Created by Vidhyadharan Mohanram on 08/06/22.
@@ -9,9 +9,9 @@ import SwiftUI
 import Combine
 import AnyCodable
 
-class TitleSubtitleViewModel: UIBaseViewModel {
+class TitleSubtitleComponentModel: UIBaseComponentModel {
     override var view: AnyView {
-        AnyView(TitleSubtitleView(viewModel: self))
+        AnyView(TitleSubtitleComponent(componentModel: self))
     }
     
     override var data: [String: Set<AnyCodable>] {
@@ -22,11 +22,11 @@ class TitleSubtitleViewModel: UIBaseViewModel {
     @Published var subtitles: [String]
 
     init(key: String,
-         rules: ViewStateRule? = nil,
+         rules: ComponentStateRule? = nil,
          title: String,
          subtitles: [String],
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ViewAction, Never>) {
+         performAction: PassthroughSubject<ComponentAction, Never>) {
         self.title = title
         self.subtitles = subtitles
         

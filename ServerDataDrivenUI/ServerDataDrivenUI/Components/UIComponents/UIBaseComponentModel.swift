@@ -1,5 +1,5 @@
 //
-//  UIBaseViewModel.swift
+//  UIBaseComponentModel.swift
 //  ServerDataDrivenUI (iOS)
 //
 //  Created by Vidhyadharan Mohanram on 07/06/22.
@@ -10,7 +10,7 @@ import Combine
 import AnyCodable
 import SwiftUI
 
-class UIBaseViewModel: UIViewModel, ObservableObject {
+class UIBaseComponentModel: UIComponentModel, ObservableObject {
     var key: String
     
     var view: AnyView {
@@ -21,28 +21,28 @@ class UIBaseViewModel: UIViewModel, ObservableObject {
     @Published var isDisabled: Bool = false
     @Published var isLoading: Bool = false
 
-    var viewStateRules: ViewStateRule?
+    var viewStateRules: ComponentStateRule?
     
     var data: [String: Set<AnyCodable>] {
         return [key: []]
     }
 
     let notifyChange: ObservableObjectPublisher
-    let performAction: PassthroughSubject<ViewAction, Never>
+    let performAction: PassthroughSubject<ComponentAction, Never>
         
     var cancellableSet = Set<AnyCancellable>()
 
     init(key: String,
-         rules: ViewStateRule?,
+         rules: ComponentStateRule?,
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ViewAction, Never>) {
+         performAction: PassthroughSubject<ComponentAction, Never>) {
         self.key = key
         self.viewStateRules = rules
         self.notifyChange = notifyChange
         self.performAction = performAction
     }
     
-    func actionCompleted(action: ViewAction, success: Bool) {
+    func actionCompleted(action: ComponentAction, success: Bool) {
         self.isLoading = false
     }
     

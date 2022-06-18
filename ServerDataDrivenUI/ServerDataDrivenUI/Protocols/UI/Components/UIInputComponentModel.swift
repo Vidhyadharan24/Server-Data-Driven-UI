@@ -1,5 +1,5 @@
 //
-//  UIInputViewModel.swift
+//  UIInputComponentModel.swift
 //  ServerDataDrivenUI (iOS)
 //
 //  Created by Vidhyadharan Mohanram on 05/06/22.
@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import AnyCodable
 
-protocol UIInputViewModel: UIViewModel, Validatable, APIDataProvider {
+protocol UIInputComponentModel: UIComponentModel, Validatable {
     var errorMessage: String? { get set }
     
     var validations: [Validation] { get }
@@ -19,7 +19,7 @@ protocol UIInputViewModel: UIViewModel, Validatable, APIDataProvider {
     var isValid: String? { get }
 }
 
-extension UIInputViewModel {
+extension UIInputComponentModel {
     
     var keyboardType: UIKeyboardType {
         for validation in validations {

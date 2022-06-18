@@ -1,5 +1,5 @@
 //
-//  TextFieldView.swift
+//  TextFieldComponent.swift
 //  ServerDataDrivenUI
 //
 //  Created by Vidhyadharan Mohanram on 29/05/22.
@@ -8,19 +8,19 @@
 import SwiftUI
 import Combine
 
-struct TextFieldView: View {
+struct TextFieldComponent: View {
     
-    @ObservedObject var viewModel: TextFieldViewModel
+    @ObservedObject var componentModel: TextFieldComponentModel
     
     var body: some View {
         VStack(alignment: .leading) {
-            TextField(viewModel.placeholder,
-                      text: $viewModel.text)
-                .foregroundColor(viewModel.isDisabled ? Color.gray : Color.black)
-                .disabled(viewModel.isDisabled)
-                .keyboardType(viewModel.keyboardType)
+            TextField(componentModel.placeholder,
+                      text: $componentModel.text)
+                .foregroundColor(componentModel.isDisabled ? Color.gray : Color.black)
+                .disabled(componentModel.isDisabled)
+                .keyboardType(componentModel.keyboardType)
                 .padding(.vertical, 11)
-            if let msg = viewModel.errorMessage {
+            if let msg = componentModel.errorMessage {
                 Divider()
                 Text(msg)
                     .font(.caption)
@@ -32,10 +32,10 @@ struct TextFieldView: View {
 
 struct TextView_Previews: PreviewProvider {
     static var previews: some View {
-        TextFieldView(viewModel: TextFieldViewModel(key: "",
+        TextFieldComponent(componentModel: TextFieldComponentModel(key: "",
                                                     text: "",
                                                     placeholder: "Placeholder",
                                                     notifyChange: ObservableObjectPublisher(),
-                                                    performAction: PassthroughSubject<ViewAction, Never>()))
+                                                    performAction: PassthroughSubject<ComponentAction, Never>()))
     }
 }

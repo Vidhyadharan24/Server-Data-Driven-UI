@@ -1,5 +1,5 @@
 //
-//  UIViewModel.swift
+//  UIComponentModel.swift
 //  ServerDataDrivenUI
 //
 //  Created by Vidhyadharan Mohanram on 29/05/22.
@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import AnyCodable
 
-protocol UIViewModel: AnyObject {
+protocol UIComponentModel: AnyObject {
     var key: String { get }
     var view: AnyView { get }
     
@@ -17,19 +17,19 @@ protocol UIViewModel: AnyObject {
     var isDisabled: Bool { get set }
     var isLoading: Bool { get set }
 
-    var viewStateRules: ViewStateRule? { get }
+    var viewStateRules: ComponentStateRule? { get }
 
     var notifyChange: ObservableObjectPublisher { get }
-    var performAction: PassthroughSubject<ViewAction, Never> { get }
+    var performAction: PassthroughSubject<ComponentAction, Never> { get }
     
     func updateState(currentValues: [String: Set<AnyCodable>])
     
     var data: [String: Set<AnyCodable>] { get }
     
-    func actionCompleted(action: ViewAction, success: Bool)
+    func actionCompleted(action: ComponentAction, success: Bool)
 }
 
-extension UIViewModel {
+extension UIComponentModel {
         
     func updateState(currentValues: [String: Set<AnyCodable>]) {
         if let hidingRules = viewStateRules?.hideOn {

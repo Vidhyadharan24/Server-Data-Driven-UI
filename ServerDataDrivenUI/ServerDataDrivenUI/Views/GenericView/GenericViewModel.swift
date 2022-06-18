@@ -10,16 +10,16 @@ import Combine
 import AnyCodable
 
 class GenericViewModel: GenericViewModelProtocol {
-    let uiViewModels: [UIViewModel]
+    let uiComponentModels: [UIComponentModel]
     
     let notifyChange = ObservableObjectPublisher()
-    var performAction = PassthroughSubject<ViewAction, Never>()
+    var performAction = PassthroughSubject<ComponentAction, Never>()
 
     private var cancellableSet = Set<AnyCancellable>()
     
     init() {
-        let phoneFieldRules = ViewStateRule(disableOn: ["loading": [true]])
-        let phoneFieldViewModel = PhoneFieldViewModel(key: "phone_field",
+        let phoneFieldRules = ComponentStateRule(disableOn: ["loading": [true]])
+        let phoneFieldViewModel = PhoneFieldComponentModel(key: "phone_field",
                                                       rules: phoneFieldRules,
                                                       countryCodeData: ["+91": 10,
                                                                         "+65": 8],
@@ -28,7 +28,7 @@ class GenericViewModel: GenericViewModelProtocol {
                                                       performAction: performAction)
         
         
-        let otpFieldRules = ViewStateRule(hideOn: ["send_otp": [false]],
+        let otpFieldRules = ComponentStateRule(hideOn: ["send_otp": [false]],
                                           disableOn: ["loading": [true]])
         let minLength = Validation.min(LengthValidationData(length: 4,
                                                             errorMessage: "OTP should have min 4 chars in length"))
@@ -36,7 +36,7 @@ class GenericViewModel: GenericViewModelProtocol {
                                                             errorMessage: "OTP should be max 4 chars in length"))
         let numbers = Validation.numbers(ValidationData(errorMessage: "OTP should contain only digits"))
         
-        let textFieldViewModel = TextFieldViewModel(key: "otp_field",
+        let textFieldViewModel = TextFieldComponentModel(key: "otp_field",
                                                     rules: otpFieldRules,
                                                     validations: [minLength,
                                                                   maxLength,
@@ -47,32 +47,32 @@ class GenericViewModel: GenericViewModelProtocol {
                                                     performAction: performAction)
         
         
-        let sendOtpRule = ViewStateRule(hideOn: ["send_otp": [true]],
+        let sendOtpRule = ComponentStateRule(hideOn: ["send_otp": [true]],
                                         disableOn: ["loading": [true]])
-        let sendOTPButton = GenericButtonViewModel(key: "send_otp",
+        let sendOTPButton = GenericButtonComponentModel(key: "send_otp",
                                                    rules: sendOtpRule,
                                                    title: "Send OTP",
                                                    notifyChange: notifyChange,
                                                    performAction: performAction)
         
         
-        let otpRules = ViewStateRule(hideOn: ["send_otp": [false]],
+        let otpRules = ComponentStateRule(hideOn: ["send_otp": [false]],
                                      disableOn: ["loading": [true]])
         
-        let verifyOTPButton = GenericButtonViewModel(key: "verify_otp",
+        let verifyOTPButton = GenericButtonComponentModel(key: "verify_otp",
                                                      rules: otpRules,
                                                      title: "Verify OTP",
                                                      notifyChange: notifyChange,
                                                      performAction: performAction)
         
-        let timerButton = TimerButtonViewModel(key: "resend_otp_button",
+        let timerButton = TimerButtonComponentModel(key: "resend_otp_button",
                                                rules: otpRules,
                                                title: "Resend OTP",
-                                               countDownDuration: 10,
+                                               countDownDuration: 60,
                                                notifyChange: notifyChange,
                                                performAction: performAction)
         
-        uiViewModels = [phoneFieldViewModel,
+        uiComponentModels = [phoneFieldViewModel,
                         textFieldViewModel,
                         sendOTPButton,
                         verifyOTPButton,
@@ -109,7 +109,7 @@ class GenericViewModel: GenericViewModelProtocol {
     }
     
     func apiCall(key: String,
-                 action: ViewAction) {
+                 action: ComponentAction) {
         updateViewState()
         objectWillChange.send()
         
@@ -119,9 +119,9 @@ class GenericViewModel: GenericViewModelProtocol {
     }
     
     func action(key: String,
-                action: ViewAction,
+                action: ComponentAction,
                 success: Bool) {
-        let vm: UIViewModel? = uiViewModels.filter { $0.key == key }.last
+        let vm: UIComponentModel? = uiComponentModels.filter { $0.key == key }.last
         vm?.actionCompleted(action: action,
                             success: success)
         
@@ -131,11 +131,11 @@ class GenericViewModel: GenericViewModelProtocol {
     
     func updateViewState() {
         var viewData = [String: Set<AnyCodable>]()
-        uiViewModels.forEach { viewModel in
+        uiComponentModels.forEach { viewModel in
             for (key, value) in viewModel.data {
                 viewData[key] = value
             }
         }
-        uiViewModels.forEach { $0.updateState(currentValues: viewData) }
+        uiComponentModels.forEach { $0.updateState(currentValues: viewData) }
     }
 }

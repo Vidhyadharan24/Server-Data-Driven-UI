@@ -17,9 +17,9 @@ struct GenericView: View {
             ScrollView {
                 Group {
                     VStack(spacing: 10) {
-                        ForEach(0..<viewModel.uiViewModels.count, id:\.self) { index in
-                            if !viewModel.uiViewModels[index].isHidden {
-                                viewModel.uiViewModels[index].view
+                        ForEach(0..<viewModel.uiComponentModels.count, id:\.self) { index in
+                            if !viewModel.uiComponentModels[index].isHidden {
+                                viewModel.uiComponentModels[index].view
                             }
                         }
                     }

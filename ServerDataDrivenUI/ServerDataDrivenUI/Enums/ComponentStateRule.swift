@@ -1,5 +1,5 @@
 //
-//  ViewStateRule.swift
+//  ComponentStateRule.swift
 //  ServerDataDrivenUI
 //
 //  Created by Vidhyadharan Mohanram on 29/05/22.
@@ -8,7 +8,7 @@
 import Foundation
 import AnyCodable
 
-struct ViewStateRule: Codable {
+struct ComponentStateRule: Codable {
     let hideOn: [String: Set<AnyCodable>]?
     let disableOn: [String: Set<AnyCodable>]?
     

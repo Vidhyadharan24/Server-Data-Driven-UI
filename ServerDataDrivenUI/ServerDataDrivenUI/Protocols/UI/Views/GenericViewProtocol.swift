@@ -9,5 +9,5 @@ import Foundation
 import Combine
 
 protocol GenericViewModelProtocol: ObservableObject, Validator {
-    var uiViewModels: [UIViewModel] { get }
+    var uiComponentModels: [UIComponentModel] { get }
 }
