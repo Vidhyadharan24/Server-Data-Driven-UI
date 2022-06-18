@@ -22,29 +22,39 @@ protocol UIViewModel: AnyObject {
     var notifyChange: ObservableObjectPublisher { get }
     var performAction: PassthroughSubject<ViewAction, Never> { get }
     
-    func updateState(currentValues: [String: [String: AnyCodable]])
+    func updateState(currentValues: [String: Set<AnyCodable>])
     
-    var data: [String: [String: AnyCodable]] { get }
+    var data: [String: Set<AnyCodable>] { get }
     
     func actionCompleted(action: ViewAction, success: Bool)
 }
 
 extension UIViewModel {
         
-    func updateState(currentValues: [String: [String: AnyCodable]]) {
+    func updateState(currentValues: [String: Set<AnyCodable>]) {
         if let hidingRules = viewStateRules?.hideOn {
-            for (viewName, viewRules) in hidingRules {
-                let viewStateData = currentValues[viewName]
-                for (stateName, value) in viewRules {
-                    isHidden = viewStateData?[stateName] == value
+            for (rule, values) in hidingRules {
+                if let currentRuleValues = currentValues[rule] {
+                    if #available(iOS 16.0, *) {
+                        isHidden = values.contains(currentRuleValues)
+                    } else {
+                        isHidden = currentRuleValues.isSubset(of: values)
+                    }
+                } else {
+                    isHidden = false
                 }
             }
         }
         if let disableOnRules = viewStateRules?.disableOn {
-            for (viewName, viewRules) in disableOnRules {
-                let viewStateData = currentValues[viewName]
-                for (stateName, value) in viewRules {
-                    isDisabled = viewStateData?[stateName] == value
+            for (rule, values) in disableOnRules {
+                if let currentRuleValues = currentValues[rule] {
+                    if #available(iOS 16.0, *) {
+                        isDisabled = values.contains(currentRuleValues)
+                    } else {
+                        isDisabled = currentRuleValues.isSubset(of: values)
+                    }
+                } else {
+                    isDisabled = false
                 }
             }
         }
@@ -52,3 +62,4 @@ extension UIViewModel {
     
 }
 
+ 

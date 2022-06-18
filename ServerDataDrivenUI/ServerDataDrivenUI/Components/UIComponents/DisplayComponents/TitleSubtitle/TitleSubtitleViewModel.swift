@@ -14,8 +14,8 @@ class TitleSubtitleViewModel: UIBaseViewModel {
         AnyView(TitleSubtitleView(viewModel: self))
     }
     
-    override var data: [String: [String: AnyCodable]] {
-        [key: ["text": AnyCodable(title)]]
+    override var data: [String: Set<AnyCodable>] {
+        [key: [AnyCodable(title)]]
     }
     
     @Published var title: String

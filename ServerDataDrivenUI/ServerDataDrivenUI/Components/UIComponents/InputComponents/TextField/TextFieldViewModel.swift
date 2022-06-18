@@ -29,8 +29,8 @@ class TextFieldViewModel: UIBaseInputViewModel {
         validate(text: text)
     }
     
-    override var data: [String: [String: AnyCodable]] {
-        [key: ["text": AnyCodable(text)]]
+    override var data: [String: Set<AnyCodable>] {
+        [key: [AnyCodable(text)]]
     }
 
     init(key: String,

@@ -23,8 +23,8 @@ class UIBaseViewModel: UIViewModel, ObservableObject {
 
     var viewStateRules: ViewStateRule?
     
-    var data: [String: [String: AnyCodable]] {
-        return [key: [:]]
+    var data: [String: Set<AnyCodable>] {
+        return [key: []]
     }
 
     let notifyChange: ObservableObjectPublisher

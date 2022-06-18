@@ -17,12 +17,12 @@ class GenericButtonViewModel: UIBaseActionViewModel {
         AnyView(GenericButton(viewModel: self))
     }
     
-    override var data: [String: [String: AnyCodable]] {
+    override var data: [String: Set<AnyCodable>] {
         if !isLoading {
-            return [key: ["action": AnyCodable(actionPerformed)]]
+            return [key: [AnyCodable(actionPerformed)]]
         } else {
-            return [key: ["action": AnyCodable(actionPerformed)],
-                    "view": ["loading": true]]
+            return [key: [AnyCodable(actionPerformed)],
+                          "loading": [true]]
         }
     }
         

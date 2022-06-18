@@ -9,11 +9,11 @@ import Foundation
 import AnyCodable
 
 struct ViewStateRule: Codable {
-    let hideOn: [String: [String: AnyCodable]]?
-    let disableOn: [String: [String: AnyCodable]]?
+    let hideOn: [String: Set<AnyCodable>]?
+    let disableOn: [String: Set<AnyCodable>]?
     
-    init(hideOn: [String: [String: AnyCodable]]? = nil,
-         disableOn: [String: [String: AnyCodable]]? = nil) {
+    init(hideOn: [String: Set<AnyCodable>]? = nil,
+         disableOn: [String: Set<AnyCodable>]? = nil) {
         self.hideOn = hideOn
         self.disableOn = disableOn
     }

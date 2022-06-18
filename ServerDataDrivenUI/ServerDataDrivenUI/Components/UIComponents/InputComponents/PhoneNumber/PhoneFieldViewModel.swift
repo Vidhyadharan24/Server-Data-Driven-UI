@@ -22,8 +22,8 @@ class PhoneFieldViewModel: UIBaseInputViewModel {
         validatePhoneNo(text: phoneNumber)
     }
     
-    override var data: [String: [String: AnyCodable]] {
-        [key: ["text": AnyCodable(phoneNumber)]]
+    override var data: [String: Set<AnyCodable>] {
+        [key: [AnyCodable(phoneNumber)]]
     }
         
     let countryCodeData: [String: Int]

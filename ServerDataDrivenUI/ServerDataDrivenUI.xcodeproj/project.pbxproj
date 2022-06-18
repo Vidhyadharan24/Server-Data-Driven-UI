@@ -27,6 +27,10 @@
 		186715192855AE88001F5060 /* GenericViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186715182855AE88001F5060 /* GenericViewProtocol.swift */; };
 		1867151B2855AED8001F5060 /* ViewAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151A2855AED8001F5060 /* ViewAction.swift */; };
 		1867151D28562904001F5060 /* UIBaseActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151C28562904001F5060 /* UIBaseActionViewModel.swift */; };
+		1867151F2856E859001F5060 /* NetworkDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151E2856E859001F5060 /* NetworkDataService.swift */; };
+		186715212856E8A2001F5060 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186715202856E8A2001F5060 /* APIConfig.swift */; };
+		186715272856E918001F5060 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186715262856E918001F5060 /* Cancellable.swift */; };
+		186715292856E93D001F5060 /* NetworkOperationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186715282856E93D001F5060 /* NetworkOperationsManager.swift */; };
 		18B8C47828437CAE00B43C57 /* TextFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C47728437CAE00B43C57 /* TextFieldViewModel.swift */; };
 		18B8C47B28437CD400B43C57 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C47A28437CD400B43C57 /* TextFieldView.swift */; };
 		18B8C47E2843978600B43C57 /* PhoneFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C47D2843978600B43C57 /* PhoneFieldView.swift */; };
@@ -81,6 +85,10 @@
 		186715182855AE88001F5060 /* GenericViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewProtocol.swift; sourceTree = "<group>"; };
 		1867151A2855AED8001F5060 /* ViewAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAction.swift; sourceTree = "<group>"; };
 		1867151C28562904001F5060 /* UIBaseActionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBaseActionViewModel.swift; sourceTree = "<group>"; };
+		1867151E2856E859001F5060 /* NetworkDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataService.swift; sourceTree = "<group>"; };
+		186715202856E8A2001F5060 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		186715262856E918001F5060 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
+		186715282856E93D001F5060 /* NetworkOperationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperationsManager.swift; sourceTree = "<group>"; };
 		18B8C47728437CAE00B43C57 /* TextFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewModel.swift; sourceTree = "<group>"; };
 		18B8C47A28437CD400B43C57 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		18B8C47D2843978600B43C57 /* PhoneFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneFieldView.swift; sourceTree = "<group>"; };
@@ -152,6 +160,7 @@
 				1862D1AC284358C500FADECC /* Designable.swift */,
 				18CB3D49284D036F00AE132F /* Validation */,
 				18CB3D48284D036500AE132F /* UI */,
+				186715262856E918001F5060 /* Cancellable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -260,6 +269,9 @@
 			isa = PBXGroup;
 			children = (
 				1862D1CC28436D8900FADECC /* APIEndpoint.swift */,
+				1867151E2856E859001F5060 /* NetworkDataService.swift */,
+				186715202856E8A2001F5060 /* APIConfig.swift */,
+				186715282856E93D001F5060 /* NetworkOperationsManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -469,8 +481,10 @@
 				18CB3D47284D021400AE132F /* UIInputViewModel.swift in Sources */,
 				18B8C4812843979900B43C57 /* PhoneFieldViewModel.swift in Sources */,
 				1867150F2854F1C1001F5060 /* ActivityIndicator.swift in Sources */,
+				1867151F2856E859001F5060 /* NetworkDataService.swift in Sources */,
 				18CB3D33284B6F5500AE132F /* GenericButton.swift in Sources */,
 				1867151B2855AED8001F5060 /* ViewAction.swift in Sources */,
+				186715272856E918001F5060 /* Cancellable.swift in Sources */,
 				1862D1CD28436D8900FADECC /* APIEndpoint.swift in Sources */,
 				1862D1B0284358D600FADECC /* Validatable.swift in Sources */,
 				18B8C47B28437CD400B43C57 /* TextFieldView.swift in Sources */,
@@ -492,10 +506,12 @@
 				1867151128556AD5001F5060 /* UIActionViewModel.swift in Sources */,
 				18CB3D3A284BB9D400AE132F /* TimerButton.swift in Sources */,
 				1867151D28562904001F5060 /* UIBaseActionViewModel.swift in Sources */,
+				186715292856E93D001F5060 /* NetworkOperationsManager.swift in Sources */,
 				18CB3D4C284EE49F00AE132F /* UIBaseInputViewModel.swift in Sources */,
 				18CB3D39284BB9D200AE132F /* TimerButtonViewModel.swift in Sources */,
 				186715192855AE88001F5060 /* GenericViewProtocol.swift in Sources */,
 				18CB3D35284B6F6F00AE132F /* GenericButtonViewModel.swift in Sources */,
+				186715212856E8A2001F5060 /* APIConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

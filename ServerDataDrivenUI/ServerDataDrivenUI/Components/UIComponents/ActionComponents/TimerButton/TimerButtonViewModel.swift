@@ -17,12 +17,12 @@ class TimerButtonViewModel: UIBaseActionViewModel {
         AnyView(TimerButton(viewModel: self))
     }
     
-    override var data: [String: [String: AnyCodable]] {
+    override var data: [String: Set<AnyCodable>] {
         if !isLoading {
-            return [key: ["action": AnyCodable(actionPerformed)]]
+            return [key: [AnyCodable(actionPerformed)]]
         } else {
-            return [key: ["action": AnyCodable(actionPerformed)],
-                    "view": ["loading": true]]
+            return [key: [AnyCodable(actionPerformed)],
+                          "loading": [true]]
         }
     }
     
@@ -86,9 +86,9 @@ class TimerButtonViewModel: UIBaseActionViewModel {
             .map { _ in }
             .sink(receiveValue: { [weak self] _ in
             guard let self = self else { return }
+            self.timeRemaining -= 1
             if self.timeRemaining > 0 {
                 self.title = "\(self.timeRemaining)"
-                self.timeRemaining -= 1
             } else {
                 self.title = self.buttonTitle
                 
