@@ -13,7 +13,7 @@ import SwiftUI
 class UIBaseInputComponentModel: UIBaseComponentModel, UIInputComponentModel {        
     var errorMessage: String?
     
-    var validations: [Validation]
+    var validations: [Validation]?
     
     var isValid: String? {
         self.validate(text: "")
@@ -25,7 +25,7 @@ class UIBaseInputComponentModel: UIBaseComponentModel, UIInputComponentModel {
         
     init(key: String,
          rules: ComponentStateRule? = nil,
-         validations: [Validation] = [],
+         validations: [Validation]? = nil,
          notifyChange: ObservableObjectPublisher,
          performAction: PassthroughSubject<ComponentAction, Never>) {
         self.validations = validations

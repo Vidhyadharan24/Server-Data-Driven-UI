@@ -35,7 +35,7 @@ class TextFieldComponentModel: UIBaseInputComponentModel {
 
     init(key: String,
          rules: ComponentStateRule? = nil,
-         validations: [Validation] = [],
+         validations: [Validation]? = nil,
          text: String,
          placeholder: String,
          notifyChange: ObservableObjectPublisher,

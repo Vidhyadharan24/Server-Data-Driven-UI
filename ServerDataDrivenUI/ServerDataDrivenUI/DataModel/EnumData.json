@@ -1,0 +1,19 @@
+{
+  "countries": [
+    {
+      "code": "+63",
+      "name": "Phillipines",
+      "length": 10
+    },
+    {
+      "code": "+65",
+      "name": "Singapore",
+      "length": 8
+    },
+    {
+      "code": "+91",
+      "name": "India",
+      "length": 10
+    }
+  ]
+}

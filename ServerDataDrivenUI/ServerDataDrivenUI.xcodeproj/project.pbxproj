@@ -30,6 +30,12 @@
 		186715212856E8A2001F5060 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186715202856E8A2001F5060 /* APIConfig.swift */; };
 		186715272856E918001F5060 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186715262856E918001F5060 /* Cancellable.swift */; };
 		186715292856E93D001F5060 /* NetworkOperationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186715282856E93D001F5060 /* NetworkOperationsManager.swift */; };
+		18671531285DC628001F5060 /* ViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18671530285DC628001F5060 /* ViewDataModel.swift */; };
+		18671533285DD138001F5060 /* EnumDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18671532285DD138001F5060 /* EnumDataModel.swift */; };
+		18671539285DE244001F5060 /* ViewDataModelData.json in Resources */ = {isa = PBXBuildFile; fileRef = 18671538285DE244001F5060 /* ViewDataModelData.json */; };
+		1867153B285DE557001F5060 /* GenericViewRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867153A285DE557001F5060 /* GenericViewRepo.swift */; };
+		18671541285EDFD8001F5060 /* ComponentModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18671540285EDFD8001F5060 /* ComponentModelFactory.swift */; };
+		18671543285F3987001F5060 /* EnumData.json in Resources */ = {isa = PBXBuildFile; fileRef = 18671542285F3987001F5060 /* EnumData.json */; };
 		18B8C47828437CAE00B43C57 /* TextFieldComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C47728437CAE00B43C57 /* TextFieldComponentModel.swift */; };
 		18B8C47B28437CD400B43C57 /* TextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C47A28437CD400B43C57 /* TextFieldComponent.swift */; };
 		18B8C47E2843978600B43C57 /* PhoneFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8C47D2843978600B43C57 /* PhoneFieldComponent.swift */; };
@@ -87,6 +93,12 @@
 		186715202856E8A2001F5060 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
 		186715262856E918001F5060 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		186715282856E93D001F5060 /* NetworkOperationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperationsManager.swift; sourceTree = "<group>"; };
+		18671530285DC628001F5060 /* ViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataModel.swift; sourceTree = "<group>"; };
+		18671532285DD138001F5060 /* EnumDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumDataModel.swift; sourceTree = "<group>"; };
+		18671538285DE244001F5060 /* ViewDataModelData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ViewDataModelData.json; sourceTree = "<group>"; };
+		1867153A285DE557001F5060 /* GenericViewRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewRepo.swift; sourceTree = "<group>"; };
+		18671540285EDFD8001F5060 /* ComponentModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentModelFactory.swift; sourceTree = "<group>"; };
+		18671542285F3987001F5060 /* EnumData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EnumData.json; sourceTree = "<group>"; };
 		18B8C47728437CAE00B43C57 /* TextFieldComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponentModel.swift; sourceTree = "<group>"; };
 		18B8C47A28437CD400B43C57 /* TextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponent.swift; sourceTree = "<group>"; };
 		18B8C47D2843978600B43C57 /* PhoneFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneFieldComponent.swift; sourceTree = "<group>"; };
@@ -280,10 +292,13 @@
 				1862D1D228437A0D00FADECC /* LaunchScreen.storyboard */,
 				1862D1D12843782D00FADECC /* ServerDataDrivenUI--iOS--Info.plist */,
 				1862D169284345E400FADECC /* ServerDataDrivenUIMain.swift */,
+				1867152F285DC60C001F5060 /* DataModel */,
 				1862D1CB28436D7900FADECC /* Networking */,
 				1862D1C428436A6900FADECC /* Enums */,
 				1862D1B5284358F600FADECC /* Components */,
 				1862D1AB284358A800FADECC /* Protocols */,
+				1867153D285EDF6E001F5060 /* Repo */,
+				1867153C285EDF63001F5060 /* ViewModel */,
 				18B8C489284399B500B43C57 /* Views */,
 				1862D16B284345E600FADECC /* Assets.xcassets */,
 				1862D1A52843583800FADECC /* OTPLoginViewModel.swift */,
@@ -311,6 +326,50 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		1867152F285DC60C001F5060 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				18671542285F3987001F5060 /* EnumData.json */,
+				18671532285DD138001F5060 /* EnumDataModel.swift */,
+				18671538285DE244001F5060 /* ViewDataModelData.json */,
+				18671530285DC628001F5060 /* ViewDataModel.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		1867153C285EDF63001F5060 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1867153E285EDF81001F5060 /* GenericViewModel */,
+				18671540285EDFD8001F5060 /* ComponentModelFactory.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1867153D285EDF6E001F5060 /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+				1867153F285EDF94001F5060 /* GenericViewRepo */,
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
+		1867153E285EDF81001F5060 /* GenericViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				18B8C486284399A600B43C57 /* GenericViewModel.swift */,
+			);
+			path = GenericViewModel;
+			sourceTree = "<group>";
+		};
+		1867153F285EDF94001F5060 /* GenericViewRepo */ = {
+			isa = PBXGroup;
+			children = (
+				1867153A285DE557001F5060 /* GenericViewRepo.swift */,
+			);
+			path = GenericViewRepo;
+			sourceTree = "<group>";
+		};
 		18B8C489284399B500B43C57 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,7 +382,6 @@
 			isa = PBXGroup;
 			children = (
 				1862D16A284345E400FADECC /* GenericView.swift */,
-				18B8C486284399A600B43C57 /* GenericViewModel.swift */,
 			);
 			path = GenericView;
 			sourceTree = "<group>";
@@ -453,7 +511,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18671543285F3987001F5060 /* EnumData.json in Resources */,
 				1862D195284345E700FADECC /* Assets.xcassets in Resources */,
+				18671539285DE244001F5060 /* ViewDataModelData.json in Resources */,
 				1862D1D328437A0D00FADECC /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,19 +540,23 @@
 				1867151F2856E859001F5060 /* NetworkDataService.swift in Sources */,
 				18CB3D33284B6F5500AE132F /* GenericButtonComponent.swift in Sources */,
 				1867151B2855AED8001F5060 /* ComponentAction.swift in Sources */,
+				18671533285DD138001F5060 /* EnumDataModel.swift in Sources */,
 				186715272856E918001F5060 /* Cancellable.swift in Sources */,
 				1862D1CD28436D8900FADECC /* APIEndpoint.swift in Sources */,
 				1862D1B0284358D600FADECC /* Validatable.swift in Sources */,
 				18B8C47B28437CD400B43C57 /* TextFieldComponent.swift in Sources */,
+				18671541285EDFD8001F5060 /* ComponentModelFactory.swift in Sources */,
 				18B8C47E2843978600B43C57 /* PhoneFieldComponent.swift in Sources */,
 				1862D1A92843585C00FADECC /* UserDetailsViewModel.swift in Sources */,
 				18CB3D45284D020400AE132F /* UIDisplayComponentModel.swift in Sources */,
+				1867153B285DE557001F5060 /* GenericViewRepo.swift in Sources */,
 				1862D1AD284358C500FADECC /* Designable.swift in Sources */,
 				18CB3D4F284EE97500AE132F /* UIBaseComponentModel.swift in Sources */,
 				18CB3D5328501FA600AE132F /* TitleSubtitleComponent.swift in Sources */,
 				1862D1C628436A7A00FADECC /* Validation.swift in Sources */,
 				18B8C487284399A600B43C57 /* GenericViewModel.swift in Sources */,
 				18CB3D5528501FB100AE132F /* TitleSubtitleComponentModel.swift in Sources */,
+				18671531285DC628001F5060 /* ViewDataModel.swift in Sources */,
 				18B8C47828437CAE00B43C57 /* TextFieldComponentModel.swift in Sources */,
 				1862D1B3284358E900FADECC /* Validator.swift in Sources */,
 				18B8C48C2845454100B43C57 /* Dropdown.swift in Sources */,

@@ -21,7 +21,7 @@ class UIBaseComponentModel: UIComponentModel, ObservableObject {
     @Published var isDisabled: Bool = false
     @Published var isLoading: Bool = false
 
-    var viewStateRules: ComponentStateRule?
+    var componentStateRules: ComponentStateRule?
     
     var data: [String: Set<AnyCodable>] {
         return [key: []]
@@ -37,7 +37,7 @@ class UIBaseComponentModel: UIComponentModel, ObservableObject {
          notifyChange: ObservableObjectPublisher,
          performAction: PassthroughSubject<ComponentAction, Never>) {
         self.key = key
-        self.viewStateRules = rules
+        self.componentStateRules = rules
         self.notifyChange = notifyChange
         self.performAction = performAction
     }

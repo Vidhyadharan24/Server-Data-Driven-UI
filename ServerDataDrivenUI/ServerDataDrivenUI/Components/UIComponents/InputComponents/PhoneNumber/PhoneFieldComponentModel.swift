@@ -26,20 +26,20 @@ class PhoneFieldComponentModel: UIBaseInputComponentModel {
         [key: [AnyCodable(phoneNumber)]]
     }
         
-    let countryCodeData: [String: Int]
+    let countries: [Country]
     var countryCodes: [String] {
-        Array(countryCodeData.keys)
+        Array(countries.map { $0.code })
     }
 
     init(key: String,
          rules: ComponentStateRule? = nil,
          validations: [Validation] = [],
-         countryCodeData: [String: Int],
+         countries: [Country],
          selectedCountryCode: String,
          phoneNumber: String = "",
          notifyChange: ObservableObjectPublisher,
          performAction: PassthroughSubject<ComponentAction, Never>) {
-        self.countryCodeData = countryCodeData
+        self.countries = countries
         self.selectedCountryCode = selectedCountryCode
         self.phoneNumber = phoneNumber
 
@@ -68,9 +68,9 @@ class PhoneFieldComponentModel: UIBaseInputComponentModel {
     }
     
     @discardableResult func validatePhoneNo(text: String) -> String? {
-        if let phoneTextCount = countryCodeData[self.selectedCountryCode],
-            text.count != phoneTextCount {
-            let errorMessage = "Phone number should be \(phoneTextCount) chars long"
+        if let country = countries.first(where: { $0.code == self.selectedCountryCode }),
+           text.count != country.length {
+            let errorMessage = "Phone number should be \(country.length) chars long"
             
             self.errorMessage = errorMessage
             return errorMessage

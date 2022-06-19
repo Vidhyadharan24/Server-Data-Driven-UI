@@ -52,14 +52,14 @@ struct PhoneFieldComponent: View {
     }
 }
 
-struct PhoneFieldView_Previews: PreviewProvider {
-    static var previews: some View {
-        let countryCodeData = ["+91": 10, "+65": 8]
-        let componentModel = PhoneFieldComponentModel(key: "",
-                                            countryCodeData: countryCodeData,
-                                            selectedCountryCode: "+65",
-                                            notifyChange: ObservableObjectPublisher(),
-                                            performAction: PassthroughSubject<ComponentAction, Never>())
-        PhoneFieldComponent(componentModel: componentModel)
-    }
-}
+//struct PhoneFieldView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let countryCodeData = ["+91": 10, "+65": 8]
+//        let componentModel = PhoneFieldComponentModel(key: "",
+//                                            countryCodeData: countryCodeData,
+//                                            selectedCountryCode: "+65",
+//                                            notifyChange: ObservableObjectPublisher(),
+//                                            performAction: PassthroughSubject<ComponentAction, Never>())
+//        PhoneFieldComponent(componentModel: componentModel)
+//    }
+//}

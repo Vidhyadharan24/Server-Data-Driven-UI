@@ -22,10 +22,10 @@ enum RequestGenerationError: Error {
 }
 
 public struct APIEndPoint: Codable {
-    var key: String
-    var path: String
-    var method: HTTPMethod
-    var headerParamaters: [String: String]
+    let key: String
+    let path: String
+    let method: HTTPMethod
+    let headerParamaters: [String: String]
     var queryParameters: [String: AnyCodable]
     var bodyParameters: [String: AnyCodable]
     

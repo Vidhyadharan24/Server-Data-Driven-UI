@@ -22,7 +22,7 @@ class GenericButtonComponentModel: UIBaseActionComponentModel {
             return [key: [AnyCodable(actionPerformed)]]
         } else {
             return [key: [AnyCodable(actionPerformed)],
-                          "loading": [true]]
+                    "loading": [true]]
         }
     }
         

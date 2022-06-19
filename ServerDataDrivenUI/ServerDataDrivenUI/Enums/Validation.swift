@@ -18,6 +18,35 @@ enum Validation: Codable {
     case email(ValidationData)
     case regex(RegexValidationData)
     
+    enum CodingKeys: String, CodingKey {
+        case nonEmpty = "non_empty"
+        case min
+        case max
+        case numbers
+        case email
+        case regex
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let value = try? container.decode(ValidationData.self, forKey: .nonEmpty) {
+            self = .nonEmpty(value)
+        } else if let value = try? container.decode(LengthValidationData.self, forKey: .min) {
+            self = .min(value)
+        } else if let value = try? container.decode(LengthValidationData.self, forKey: .max) {
+            self = .max(value)
+        } else if let value = try? container.decode(ValidationData.self, forKey: .numbers) {
+            self = .numbers(value)
+        } else if let value = try? container.decode(ValidationData.self, forKey: .email) {
+            self = .email(value)
+        } else if let value = try? container.decode(RegexValidationData.self, forKey: .regex) {
+            self = .regex(value)
+        } else {
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: container.codingPath,
+                                                                    debugDescription: "Data doesn't match"))
+        }
+    }
+    
     var keyboardType: UIKeyboardType {
         switch self {
         case .numbers:
@@ -67,16 +96,30 @@ enum Validation: Codable {
 
 struct ValidationData: Codable {
     let errorMessage: String
+    
+    enum CodingKeys: String, CodingKey {
+        case errorMessage = "error_message"
+    }
 }
 
 struct LengthValidationData: Codable {
     let length: Int
     let errorMessage: String
+    
+    enum CodingKeys: String, CodingKey {
+        case length
+        case errorMessage = "error_message"
+    }
 }
 
 struct RegexValidationData: Codable {
     let regex: String
     let errorMessage: String
+    
+    enum CodingKeys: String, CodingKey {
+        case regex
+        case errorMessage = "error_message"
+    }
 }
 
 struct ValidationFunctions {

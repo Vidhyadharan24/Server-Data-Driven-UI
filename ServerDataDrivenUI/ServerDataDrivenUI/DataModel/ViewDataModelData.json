@@ -1,0 +1,118 @@
+{
+  "views": {
+    "login": [
+      {
+        "phone_number": {
+          "key": "phone_number",
+          "country_code_key": "country_code",
+          "phone_number_key": "phone_number",
+          "component_state_rules": {
+            "disableOn": {
+              "loading": [
+                true
+              ]
+            }
+          }
+        }
+      },
+      {
+        "text_field": {
+          "key": "login_otp",
+          "placeholder": "Login OTP",
+          "validations": [
+            {
+              "non_empty": {
+                "error_message": "Otp cannot be empty"
+              }
+            },
+            {
+              "min": {
+                "length": 4,
+                "error_message": "Otp should be atleast 4 chars long"
+              }
+            },
+            {
+              "max": {
+                "length": 4,
+                "error_message": "Otp should be 4 chars long"
+              }
+            },
+            {
+              "numbers": {
+                "error_message": "Otp should contain only numbers"
+              }
+            }
+          ],
+          "component_state_rules": {
+            "hideOn": {
+              "send_otp": [
+                false
+              ]
+            },
+            "disableOn": {
+              "loading": [
+                true
+              ]
+            }
+          }
+        }
+      },
+      {
+        "button": {
+          "key": "send_otp",
+          "title": "Send OTP",
+          "component_state_rules": {
+            "hideOn": {
+              "send_otp": [
+                true
+              ]
+            },
+            "disableOn": {
+              "loading": [
+                true
+              ]
+            }
+          }
+        }
+      },
+      {
+        "button": {
+          "key": "verify_otp",
+          "title": "Verify OTP",
+          "component_state_rules": {
+            "hideOn": {
+              "send_otp": [
+                false
+              ]
+            },
+            "disableOn": {
+              "loading": [
+                true
+              ]
+            }
+          }
+        }
+      },
+      {
+        "timer_button": {
+          "key": "resend_otp",
+          "title": "Resend OTP",
+          "count_down_duration": 60,
+          "component_state_rules": {
+            "hideOn": {
+              "send_otp": [
+                false
+              ]
+            },
+            "disableOn": {
+              "loading": [
+                true
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+

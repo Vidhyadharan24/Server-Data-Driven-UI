@@ -17,7 +17,7 @@ protocol UIComponentModel: AnyObject {
     var isDisabled: Bool { get set }
     var isLoading: Bool { get set }
 
-    var viewStateRules: ComponentStateRule? { get }
+    var componentStateRules: ComponentStateRule? { get }
 
     var notifyChange: ObservableObjectPublisher { get }
     var performAction: PassthroughSubject<ComponentAction, Never> { get }
@@ -32,7 +32,7 @@ protocol UIComponentModel: AnyObject {
 extension UIComponentModel {
         
     func updateState(currentValues: [String: Set<AnyCodable>]) {
-        if let hidingRules = viewStateRules?.hideOn {
+        if let hidingRules = componentStateRules?.hideOn {
             for (rule, values) in hidingRules {
                 if let currentRuleValues = currentValues[rule] {
                     if #available(iOS 16.0, *) {
@@ -45,7 +45,7 @@ extension UIComponentModel {
                 }
             }
         }
-        if let disableOnRules = viewStateRules?.disableOn {
+        if let disableOnRules = componentStateRules?.disableOn {
             for (rule, values) in disableOnRules {
                 if let currentRuleValues = currentValues[rule] {
                     if #available(iOS 16.0, *) {
