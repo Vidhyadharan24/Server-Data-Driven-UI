@@ -8,14 +8,10 @@
 import Foundation
 import Combine
 import AnyCodable
-import SwiftUI
 
 class UIBaseComponentModel: UIComponentModel, ObservableObject {
     var key: String
-    
-    var view: AnyView {
-        AnyView(EmptyView())
-    }
+    var uiComponent: UIComponent
     
     @Published var isHidden: Bool = false
     @Published var isDisabled: Bool = false
@@ -30,23 +26,25 @@ class UIBaseComponentModel: UIComponentModel, ObservableObject {
     }
 
     let notifyChange: PassthroughSubject<String, Never>
-    let performAction: PassthroughSubject<UIActionComponentModel, Never>
+    let performAction: PassthroughSubject<UIComponentModel, Never>
         
     var cancellableSet = Set<AnyCancellable>()
 
     init(key: String,
+         uiComponent: UIComponent,
          rules: ComponentStateRule?,
          componentAction: ComponentAction? = nil,
          notifyChange: PassthroughSubject<String, Never>,
-         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
+         performAction: PassthroughSubject<UIComponentModel, Never>) {
         self.key = key
+        self.uiComponent = uiComponent
         self.componentStateRules = rules
         self.componentAction = componentAction
         self.notifyChange = notifyChange
         self.performAction = performAction
     }
     
-    func resetIfNeeded(onChange: String) -> Bool {
+    @discardableResult func resetIfNeeded(onChange: String) -> Bool {
         guard let shouldReset = componentStateRules?.resetOnChange?.contains(onChange),
               shouldReset else { return false }
         self.actionPerformed = false
@@ -56,12 +54,7 @@ class UIBaseComponentModel: UIComponentModel, ObservableObject {
     
     func actionCompleted(success: Bool) {
         self.isLoading = false
+        self.actionPerformed = success
     }
     
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
-                                        to: nil,
-                                        from: nil,
-                                        for: nil)
-    }
 }

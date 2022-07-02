@@ -59,7 +59,7 @@ struct PhoneFieldComponent: View {
 //                                            countryCodeData: countryCodeData,
 //                                            selectedCountryCode: "+65",
 //                                            notifyChange: ObservableObjectPublisher(),
-//                                            performAction: PassthroughSubject<UIActionComponentModel, Never>())
+//                                            performAction: PassthroughSubject<UIComponentModel, Never>())
 //        PhoneFieldComponent(componentModel: componentModel)
 //    }
 //}

@@ -11,7 +11,7 @@ class GenericViewRepo {
     let componentDataModels: [UIComponentDataModel]
     
     init() {
-        let viewDataModel: ViewDataModel = loadJson(filename: "ViewDataModelData")!
+        let viewDataModel: ViewDataModel = Utils.loadJson(filename: "ViewDataModelData")!
         self.componentDataModels = viewDataModel.views["login"] ?? []
     }
 }

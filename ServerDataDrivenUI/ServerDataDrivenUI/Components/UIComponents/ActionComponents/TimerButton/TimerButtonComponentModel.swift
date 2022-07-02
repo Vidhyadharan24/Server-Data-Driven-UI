@@ -5,17 +5,13 @@
 //  Created by Vidhyadharan Mohanram on 04/06/22.
 //
 
-import SwiftUI
+import Foundation
 import Combine
 import AnyCodable
 
-class TimerButtonComponentModel: UIBaseActionComponentModel {
+class TimerButtonComponentModel: UIBaseComponentModel {
     @Published var title: String
     var action: (() -> Void)?
-
-    override var view: AnyView {
-        AnyView(TimerButtonComponent(componentModel: self))
-    }
     
     override var data: [String: Set<AnyCodable>] {
         guard let componentAction = componentAction else { return [:] }
@@ -45,19 +41,21 @@ class TimerButtonComponentModel: UIBaseActionComponentModel {
     private var buttonTitle: String
 
     init(key: String,
+         uiComponent: UIComponent,
          rules: ComponentStateRule? = nil,
          validations: [Validation] = [],
          title: String,
          componentAction: ComponentAction? = nil,
          countDownDuration: Int,
          notifyChange: PassthroughSubject<String, Never>,
-         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
+         performAction: PassthroughSubject<UIComponentModel, Never>) {
 
         self.title = title
         self.buttonTitle = title
         self.countDownDuration = countDownDuration
                 
         super.init(key: key,
+                   uiComponent: uiComponent,
                    rules: rules,
                    componentAction: componentAction,
                    notifyChange: notifyChange,
@@ -74,9 +72,7 @@ class TimerButtonComponentModel: UIBaseActionComponentModel {
             .store(in: &cancellableSet)
     }
     
-    func pressed() {
-        self.hideKeyboard()
-        
+    func pressed() {        
         self.isLoading = true
         self.performAction.send(self)
     }

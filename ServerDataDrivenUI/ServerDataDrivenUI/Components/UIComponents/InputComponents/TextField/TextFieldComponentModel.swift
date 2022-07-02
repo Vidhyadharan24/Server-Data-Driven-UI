@@ -5,7 +5,6 @@
 //  Created by Vidhyadharan Mohanram on 29/05/22.
 //
 
-import SwiftUI
 import Combine
 import AnyCodable
 
@@ -13,10 +12,6 @@ class TextFieldComponentModel: UIBaseInputComponentModel {
     @Published var text: String
     
     var placeholder: String
-    
-    override var view: AnyView {
-        AnyView(TextFieldComponent(componentModel: self))
-    }
     
     override var isHidden: Bool {
         didSet {
@@ -34,17 +29,19 @@ class TextFieldComponentModel: UIBaseInputComponentModel {
     }
 
     init(key: String,
+         uiComponent: UIComponent,
          rules: ComponentStateRule? = nil,
          validations: [Validation]? = nil,
          componentAction: ComponentAction? = nil,
          text: String,
          placeholder: String,
          notifyChange: PassthroughSubject<String, Never>,
-         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
+         performAction: PassthroughSubject<UIComponentModel, Never>) {
         self.text = text
         self.placeholder = placeholder
 
         super.init(key: key,
+                   uiComponent: uiComponent,
                    rules: rules,
                    validations: validations,
                    componentAction: componentAction,

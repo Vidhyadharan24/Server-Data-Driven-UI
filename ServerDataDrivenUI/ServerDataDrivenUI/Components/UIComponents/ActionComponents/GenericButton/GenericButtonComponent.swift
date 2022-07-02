@@ -13,6 +13,7 @@ struct GenericButtonComponent: View {
     
     var body: some View {
         Button {
+            hideKeyboard()
             componentModel.pressed()
         } label: {
             if componentModel.isLoading {
@@ -38,17 +39,22 @@ struct GenericButtonComponent: View {
 
 struct GenericButton_Previews: PreviewProvider {
     static var previews: some View {
+        let notifyChange = PassthroughSubject<String, Never>()
+        let performAction = PassthroughSubject<UIComponentModel, Never>()
+        
         let vm = GenericButtonComponentModel(key: "send_otp",
-                                        title: "Send OTP",
-                                        notifyChange: PassthroughSubject<String, Never>(),
-         performAction: PassthroughSubject<UIActionComponentModel, Never>())
+                                             uiComponent: .genericButton,
+                                             title: "Send OTP",
+                                             notifyChange: notifyChange,
+                                             performAction: performAction)
         vm.isLoading = true
         return Group {
             GenericButtonComponent(componentModel: vm)
             GenericButtonComponent(componentModel: GenericButtonComponentModel(key: "verify_otp",
-                                                            title: "Verify OTP",
-                                                            notifyChange: PassthroughSubject<String, Never>(),
-                                                            performAction: PassthroughSubject<UIActionComponentModel, Never>()))
+                                                                               uiComponent: .genericButton,
+                                                                               title: "Verify OTP",
+                                                                               notifyChange: notifyChange,
+                                                                               performAction: performAction))
         }
     }
 }

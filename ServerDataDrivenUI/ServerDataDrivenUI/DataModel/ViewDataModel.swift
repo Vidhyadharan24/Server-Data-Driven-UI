@@ -45,6 +45,7 @@ protocol ComponentDataModel: Codable {}
 
 struct PhoneComponentDataModel: ComponentDataModel {
     let key: String
+    let uiComponent: UIComponent
     let countryCodeKey: String
     let phoneNumberKey: String
     let componentStateRules: ComponentStateRule?
@@ -52,6 +53,7 @@ struct PhoneComponentDataModel: ComponentDataModel {
 
     enum CodingKeys: String, CodingKey {
         case key
+        case uiComponent = "ui_component"
         case countryCodeKey = "country_code_key"
         case phoneNumberKey = "phone_number_key"
         case componentStateRules = "component_state_rules"
@@ -61,6 +63,7 @@ struct PhoneComponentDataModel: ComponentDataModel {
 
 struct TextFieldComponentDataModel: ComponentDataModel {
     let key: String
+    let uiComponent: UIComponent
     let defaultText: String?
     let placeholder: String?
     let validations: [Validation]?
@@ -69,6 +72,7 @@ struct TextFieldComponentDataModel: ComponentDataModel {
 
     enum CodingKeys: String, CodingKey {
         case key
+        case uiComponent = "ui_component"
         case defaultText = "default_text"
         case placeholder
         case validations
@@ -79,12 +83,14 @@ struct TextFieldComponentDataModel: ComponentDataModel {
 
 struct ButtonComponentDataModel: ComponentDataModel {
     let key: String
+    let uiComponent: UIComponent
     let title: String
     let componentStateRules: ComponentStateRule?
     let componentAction: ComponentAction?
     
     enum CodingKeys: String, CodingKey {
         case key
+        case uiComponent = "ui_component"
         case title
         case componentStateRules = "component_state_rules"
         case componentAction = "component_action"
@@ -93,6 +99,7 @@ struct ButtonComponentDataModel: ComponentDataModel {
 
 struct TimerButtonComponentDataModel: ComponentDataModel {
     let key: String
+    let uiComponent: UIComponent
     let title: String
     let countDownDuration: Int
     let componentStateRules: ComponentStateRule?
@@ -100,6 +107,7 @@ struct TimerButtonComponentDataModel: ComponentDataModel {
 
     enum CodingKeys: String, CodingKey {
         case key
+        case uiComponent = "ui_component"
         case title
         case countDownDuration = "count_down_duration"
         case componentStateRules = "component_state_rules"

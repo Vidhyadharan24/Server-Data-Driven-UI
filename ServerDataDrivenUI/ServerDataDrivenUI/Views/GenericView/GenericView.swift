@@ -13,14 +13,19 @@ struct GenericView: View {
     @State var presentingModal: Bool = true
 
     var body: some View {
-        GeometryReader { geometry in
+        var uiComponents: [AnyView] = []
+        for componentModel in viewModel.uiComponentModels {
+            guard !componentModel.isHidden else { continue }
+            guard let uiComponent = UIComponentFactory.component(for: componentModel) else { continue }
+            uiComponents.append(uiComponent)
+        }
+        
+        return GeometryReader { geometry in
             ScrollView {
                 Group {
                     VStack(spacing: 10) {
-                        ForEach(0..<viewModel.uiComponentModels.count, id:\.self) { index in
-                            if !viewModel.uiComponentModels[index].isHidden {
-                                viewModel.uiComponentModels[index].view
-                            }
+                        ForEach(0..<uiComponents.count, id:\.self) { index in
+                            uiComponents[index]
                         }
                     }
                     .padding(.horizontal, 15)

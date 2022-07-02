@@ -13,6 +13,7 @@ struct TimerButtonComponent: View {
         
     var body: some View {
         Button {
+            hideKeyboard()
             componentModel.pressed()
         } label: {
             if componentModel.isLoading {
@@ -40,8 +41,9 @@ struct TimerButtonComponent: View {
 struct TimerButton_Previews: PreviewProvider {
     static var previews: some View {
         let notifyChange = PassthroughSubject<String, Never>()
-        let performAction = PassthroughSubject<UIActionComponentModel, Never>()
+        let performAction = PassthroughSubject<UIComponentModel, Never>()
         let componentModel = TimerButtonComponentModel(key: "resend_otp",
+                                                       uiComponent: .timerButton,
                                                        title: "Resend OTP",
                                                        countDownDuration: 60,
                                                        notifyChange: notifyChange,

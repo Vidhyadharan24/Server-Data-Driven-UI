@@ -10,16 +10,17 @@ import Combine
 
 struct ComponentModelFactory {
     static let enumDataModel: EnumDataModel = {
-        loadJson(filename: "EnumData")!
+        Utils.loadJson(filename: "EnumData")!
     }()
 
     
     static func componentModel(for dataModel: UIComponentDataModel,
                                notifyChange: PassthroughSubject<String, Never>,
-                               performAction: PassthroughSubject<UIActionComponentModel, Never>) -> UIComponentModel {
+                               performAction: PassthroughSubject<UIComponentModel, Never>) -> UIComponentModel {
         switch dataModel {
         case .phoneNumber(let dataModel):
             return PhoneFieldComponentModel(key: dataModel.key,
+                                            uiComponent: dataModel.uiComponent,
                                             rules: dataModel.componentStateRules,
                                             componentAction: dataModel.componentAction,
                                             countries: enumDataModel.countries,
@@ -28,6 +29,7 @@ struct ComponentModelFactory {
                                             performAction: performAction)
         case .textField(let dataModel):
             return TextFieldComponentModel(key: dataModel.key,
+                                           uiComponent: dataModel.uiComponent,
                                            rules: dataModel.componentStateRules,
                                            validations: dataModel.validations,
                                            componentAction: dataModel.componentAction,
@@ -37,6 +39,7 @@ struct ComponentModelFactory {
                                            performAction: performAction)
         case .button(let dataModel):
             return GenericButtonComponentModel(key: dataModel.key,
+                                               uiComponent: dataModel.uiComponent,
                                                rules: dataModel.componentStateRules,
                                                componentAction: dataModel.componentAction,
                                                title: dataModel.title,
@@ -44,6 +47,7 @@ struct ComponentModelFactory {
                                                performAction: performAction)
         case .timerButton(let dataModel):
             return TimerButtonComponentModel(key: dataModel.key,
+                                             uiComponent: dataModel.uiComponent,
                                              rules: dataModel.componentStateRules,
                                              title: dataModel.title,
                                              componentAction: dataModel.componentAction,
@@ -55,7 +59,7 @@ struct ComponentModelFactory {
     
     static func componentModels(for dataModels: [UIComponentDataModel],
                                  notifyChange: PassthroughSubject<String, Never>,
-                                performAction: PassthroughSubject<UIActionComponentModel, Never>) -> [UIComponentModel] {
+                                performAction: PassthroughSubject<UIComponentModel, Never>) -> [UIComponentModel] {
         var componentModels = [UIComponentModel]()
         
         for dataModel in dataModels {

@@ -33,8 +33,9 @@ struct TextFieldComponent: View {
 struct TextView_Previews: PreviewProvider {
     static var previews: some View {
         let notifyChange = PassthroughSubject<String, Never>()
-        let performAction = PassthroughSubject<UIActionComponentModel, Never>()
+        let performAction = PassthroughSubject<UIComponentModel, Never>()
         let componentModel = TextFieldComponentModel(key: "",
+                                                     uiComponent: .textField,
                                                      text: "",
                                                      placeholder: "Placeholder",
                                                      notifyChange: notifyChange,

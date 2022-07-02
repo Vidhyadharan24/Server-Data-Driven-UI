@@ -5,16 +5,11 @@
 //  Created by Vidhyadharan Mohanram on 04/06/22.
 //
 
-import SwiftUI
 import Combine
 import AnyCodable
 
-class GenericButtonComponentModel: UIBaseActionComponentModel {
+class GenericButtonComponentModel: UIBaseComponentModel {
     @Published var title: String
-
-    override var view: AnyView {
-        AnyView(GenericButtonComponent(componentModel: self))
-    }
     
     override var data: [String: Set<AnyCodable>] {
         guard let componentAction = componentAction else { return [:] }
@@ -35,25 +30,25 @@ class GenericButtonComponentModel: UIBaseActionComponentModel {
     }
         
     init(key: String,
+         uiComponent: UIComponent,
          rules: ComponentStateRule? = nil,
          validations: [Validation] = [],
          componentAction: ComponentAction? = nil,
          title: String,
          notifyChange: PassthroughSubject<String, Never>,
-         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
+         performAction: PassthroughSubject<UIComponentModel, Never>) {
 
         self.title = title
                 
         super.init(key: key,
+                   uiComponent: uiComponent,
                    rules: rules,
                    componentAction: componentAction,
                    notifyChange: notifyChange,
                    performAction: performAction)
     }
         
-    func pressed() {
-        self.hideKeyboard()
-        
+    func pressed() {        
         self.isLoading = true
         self.performAction.send(self)
     }

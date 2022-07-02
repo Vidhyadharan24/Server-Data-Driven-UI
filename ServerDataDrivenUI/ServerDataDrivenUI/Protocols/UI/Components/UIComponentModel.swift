@@ -5,30 +5,27 @@
 //  Created by Vidhyadharan Mohanram on 29/05/22.
 //
 
-import SwiftUI
 import Combine
 import AnyCodable
 
 protocol UIComponentModel: AnyObject {
     var key: String { get }
-    var view: AnyView { get }
-    
+    var uiComponent: UIComponent { get }
     var isHidden: Bool { get set }
     var isDisabled: Bool { get set }
     var isLoading: Bool { get set }
 
     var actionPerformed: Bool { get set }
-    var componentAction: ComponentAction? { get }
     var componentStateRules: ComponentStateRule? { get }
+    var componentAction: ComponentAction? { get }
 
     var notifyChange: PassthroughSubject<String, Never> { get }
-    var performAction: PassthroughSubject<UIActionComponentModel, Never> { get }
-
     func resetIfNeeded(onChange: String) -> Bool
-    func updateState(currentValues: [String: Set<AnyCodable>])
     
     var data: [String: Set<AnyCodable>] { get }
-    
+    func updateState(currentValues: [String: Set<AnyCodable>])
+        
+    var performAction: PassthroughSubject<UIComponentModel, Never> { get }
     func actionCompleted(success: Bool)
 }
 

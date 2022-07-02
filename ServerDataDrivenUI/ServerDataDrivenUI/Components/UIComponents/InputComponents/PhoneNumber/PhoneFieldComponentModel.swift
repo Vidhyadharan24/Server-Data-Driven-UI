@@ -5,18 +5,12 @@
 //  Created by Vidhyadharan Mohanram on 29/05/22.
 //
    
-import SwiftUI
 import Combine
 import AnyCodable
 
 class PhoneFieldComponentModel: UIBaseInputComponentModel {
     @Published var selectedCountryCode: String
     @Published var phoneNumber: String
-
-    override var view: AnyView {
-        AnyView(PhoneFieldComponent(componentModel: self)
-            .zIndex(100))
-    }
 
     override var isValid: String? {
         validatePhoneNo(text: phoneNumber)
@@ -32,6 +26,7 @@ class PhoneFieldComponentModel: UIBaseInputComponentModel {
     }
 
     init(key: String,
+         uiComponent: UIComponent,
          rules: ComponentStateRule? = nil,
          validations: [Validation] = [],
          componentAction: ComponentAction? = nil,
@@ -39,12 +34,13 @@ class PhoneFieldComponentModel: UIBaseInputComponentModel {
          selectedCountryCode: String,
          phoneNumber: String = "",
          notifyChange: PassthroughSubject<String, Never>,
-         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
+         performAction: PassthroughSubject<UIComponentModel, Never>) {
         self.countries = countries
         self.selectedCountryCode = selectedCountryCode
         self.phoneNumber = phoneNumber
 
         super.init(key: key,
+                   uiComponent: uiComponent,
                    rules: rules,
                    validations: validations,
                    componentAction: componentAction,

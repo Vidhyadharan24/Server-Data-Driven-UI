@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		185D31682870AEC500D241DE /* UIComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D31672870AEC500D241DE /* UIComponent.swift */; };
+		185D316A2870B13400D241DE /* UIComponentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D31692870B13400D241DE /* UIComponentFactory.swift */; };
+		185D316D2870C3D200D241DE /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D316C2870C3D200D241DE /* ViewExtension.swift */; };
+		185D31702870C47200D241DE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D316F2870C47200D241DE /* Utils.swift */; };
 		1862D182284345E700FADECC /* ServerDataDrivenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862D181284345E700FADECC /* ServerDataDrivenUITests.swift */; };
 		1862D184284345E700FADECC /* ServerDataDrivenUILaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862D183284345E700FADECC /* ServerDataDrivenUILaunchTests.swift */; };
 		1862D191284345E700FADECC /* ServerDataDrivenUIMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862D169284345E400FADECC /* ServerDataDrivenUIMain.swift */; };
@@ -22,10 +26,8 @@
 		1862D1CD28436D8900FADECC /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862D1CC28436D8900FADECC /* APIEndpoint.swift */; };
 		1862D1D328437A0D00FADECC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1862D1D228437A0D00FADECC /* LaunchScreen.storyboard */; };
 		1867150F2854F1C1001F5060 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867150E2854F1C1001F5060 /* ActivityIndicator.swift */; };
-		1867151128556AD5001F5060 /* UIActionComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151028556AD5001F5060 /* UIActionComponentModel.swift */; };
 		186715192855AE88001F5060 /* GenericViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186715182855AE88001F5060 /* GenericViewProtocol.swift */; };
 		1867151B2855AED8001F5060 /* ComponentAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151A2855AED8001F5060 /* ComponentAction.swift */; };
-		1867151D28562904001F5060 /* UIBaseActionComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151C28562904001F5060 /* UIBaseActionComponentModel.swift */; };
 		1867151F2856E859001F5060 /* NetworkDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1867151E2856E859001F5060 /* NetworkDataService.swift */; };
 		186715212856E8A2001F5060 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186715202856E8A2001F5060 /* APIConfig.swift */; };
 		186715272856E918001F5060 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186715262856E918001F5060 /* Cancellable.swift */; };
@@ -48,7 +50,6 @@
 		18CB3D39284BB9D200AE132F /* TimerButtonComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB3D38284BB7F800AE132F /* TimerButtonComponentModel.swift */; };
 		18CB3D3A284BB9D400AE132F /* TimerButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB3D36284BB7A600AE132F /* TimerButtonComponent.swift */; };
 		18CB3D43284D004600AE132F /* AnyCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 18CB3D42284D004600AE132F /* AnyCodable */; };
-		18CB3D45284D020400AE132F /* UIDisplayComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB3D44284D020400AE132F /* UIDisplayComponentModel.swift */; };
 		18CB3D47284D021400AE132F /* UIInputComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB3D46284D021400AE132F /* UIInputComponentModel.swift */; };
 		18CB3D4C284EE49F00AE132F /* UIBaseInputComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB3D4B284EE49F00AE132F /* UIBaseInputComponentModel.swift */; };
 		18CB3D4F284EE97500AE132F /* UIBaseComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB3D4E284EE97500AE132F /* UIBaseComponentModel.swift */; };
@@ -67,6 +68,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		185D31672870AEC500D241DE /* UIComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComponent.swift; sourceTree = "<group>"; };
+		185D31692870B13400D241DE /* UIComponentFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComponentFactory.swift; sourceTree = "<group>"; };
+		185D316C2870C3D200D241DE /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		185D316F2870C47200D241DE /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		1862D169284345E400FADECC /* ServerDataDrivenUIMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDataDrivenUIMain.swift; sourceTree = "<group>"; };
 		1862D16A284345E400FADECC /* GenericView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericView.swift; sourceTree = "<group>"; };
 		1862D16B284345E600FADECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,10 +90,8 @@
 		1862D1D12843782D00FADECC /* ServerDataDrivenUI--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ServerDataDrivenUI--iOS--Info.plist"; sourceTree = "<group>"; };
 		1862D1D228437A0D00FADECC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1867150E2854F1C1001F5060 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
-		1867151028556AD5001F5060 /* UIActionComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActionComponentModel.swift; sourceTree = "<group>"; };
 		186715182855AE88001F5060 /* GenericViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewProtocol.swift; sourceTree = "<group>"; };
 		1867151A2855AED8001F5060 /* ComponentAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentAction.swift; sourceTree = "<group>"; };
-		1867151C28562904001F5060 /* UIBaseActionComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBaseActionComponentModel.swift; sourceTree = "<group>"; };
 		1867151E2856E859001F5060 /* NetworkDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataService.swift; sourceTree = "<group>"; };
 		186715202856E8A2001F5060 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
 		186715262856E918001F5060 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
@@ -110,7 +113,6 @@
 		18CB3D34284B6F6F00AE132F /* GenericButtonComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButtonComponentModel.swift; sourceTree = "<group>"; };
 		18CB3D36284BB7A600AE132F /* TimerButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButtonComponent.swift; sourceTree = "<group>"; };
 		18CB3D38284BB7F800AE132F /* TimerButtonComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButtonComponentModel.swift; sourceTree = "<group>"; };
-		18CB3D44284D020400AE132F /* UIDisplayComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDisplayComponentModel.swift; sourceTree = "<group>"; };
 		18CB3D46284D021400AE132F /* UIInputComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInputComponentModel.swift; sourceTree = "<group>"; };
 		18CB3D4B284EE49F00AE132F /* UIBaseInputComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBaseInputComponentModel.swift; sourceTree = "<group>"; };
 		18CB3D4E284EE97500AE132F /* UIBaseComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBaseComponentModel.swift; sourceTree = "<group>"; };
@@ -137,6 +139,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		185D316B2870C3BF00D241DE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				185D316C2870C3D200D241DE /* ViewExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		185D316E2870C46600D241DE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				185D316F2870C47200D241DE /* Utils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		1862D163284345E300FADECC = {
 			isa = PBXGroup;
 			children = (
@@ -216,7 +234,6 @@
 			children = (
 				1862D1C2284369B400FADECC /* TimerButton */,
 				1862D1BD284359BF00FADECC /* GenericButton */,
-				1867151C28562904001F5060 /* UIBaseActionComponentModel.swift */,
 			);
 			path = ActionComponents;
 			sourceTree = "<group>";
@@ -300,6 +317,7 @@
 				1867153D285EDF6E001F5060 /* Repo */,
 				1867153C285EDF63001F5060 /* ViewModel */,
 				18B8C489284399B500B43C57 /* Views */,
+				185D316E2870C46600D241DE /* Utils */,
 				1862D16B284345E600FADECC /* Assets.xcassets */,
 				1862D1A52843583800FADECC /* OTPLoginViewModel.swift */,
 				1862D1A82843585C00FADECC /* UserDetailsViewModel.swift */,
@@ -311,9 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				18B8C483284397BA00B43C57 /* UIComponentModel.swift */,
-				18CB3D44284D020400AE132F /* UIDisplayComponentModel.swift */,
 				18CB3D46284D021400AE132F /* UIInputComponentModel.swift */,
-				1867151028556AD5001F5060 /* UIActionComponentModel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -333,6 +349,7 @@
 				18671532285DD138001F5060 /* EnumDataModel.swift */,
 				18671538285DE244001F5060 /* ViewDataModelData.json */,
 				18671530285DC628001F5060 /* ViewDataModel.swift */,
+				185D31672870AEC500D241DE /* UIComponent.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -416,10 +433,12 @@
 		18CB3D4D284EE96000AE132F /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				185D316B2870C3BF00D241DE /* Extensions */,
 				1862D1B92843592500FADECC /* ActionComponents */,
 				1862D1B72843590900FADECC /* InputComponents */,
 				1862D1B62843590000FADECC /* DisplayComponents */,
 				18CB3D4E284EE97500AE132F /* UIBaseComponentModel.swift */,
+				185D31692870B13400D241DE /* UIComponentFactory.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -539,16 +558,19 @@
 				1867150F2854F1C1001F5060 /* ActivityIndicator.swift in Sources */,
 				1867151F2856E859001F5060 /* NetworkDataService.swift in Sources */,
 				18CB3D33284B6F5500AE132F /* GenericButtonComponent.swift in Sources */,
+				185D31682870AEC500D241DE /* UIComponent.swift in Sources */,
 				1867151B2855AED8001F5060 /* ComponentAction.swift in Sources */,
 				18671533285DD138001F5060 /* EnumDataModel.swift in Sources */,
 				186715272856E918001F5060 /* Cancellable.swift in Sources */,
 				1862D1CD28436D8900FADECC /* APIEndpoint.swift in Sources */,
 				1862D1B0284358D600FADECC /* Validatable.swift in Sources */,
+				185D316A2870B13400D241DE /* UIComponentFactory.swift in Sources */,
 				18B8C47B28437CD400B43C57 /* TextFieldComponent.swift in Sources */,
+				185D31702870C47200D241DE /* Utils.swift in Sources */,
 				18671541285EDFD8001F5060 /* ComponentModelFactory.swift in Sources */,
 				18B8C47E2843978600B43C57 /* PhoneFieldComponent.swift in Sources */,
 				1862D1A92843585C00FADECC /* UserDetailsViewModel.swift in Sources */,
-				18CB3D45284D020400AE132F /* UIDisplayComponentModel.swift in Sources */,
+				185D316D2870C3D200D241DE /* ViewExtension.swift in Sources */,
 				1867153B285DE557001F5060 /* GenericViewRepo.swift in Sources */,
 				1862D1AD284358C500FADECC /* Designable.swift in Sources */,
 				18CB3D4F284EE97500AE132F /* UIBaseComponentModel.swift in Sources */,
@@ -563,9 +585,7 @@
 				1862D191284345E700FADECC /* ServerDataDrivenUIMain.swift in Sources */,
 				1862D1C928436AF500FADECC /* ComponentStateRule.swift in Sources */,
 				1862D1A62843583800FADECC /* OTPLoginViewModel.swift in Sources */,
-				1867151128556AD5001F5060 /* UIActionComponentModel.swift in Sources */,
 				18CB3D3A284BB9D400AE132F /* TimerButtonComponent.swift in Sources */,
-				1867151D28562904001F5060 /* UIBaseActionComponentModel.swift in Sources */,
 				186715292856E93D001F5060 /* NetworkOperationsManager.swift in Sources */,
 				18CB3D4C284EE49F00AE132F /* UIBaseInputComponentModel.swift in Sources */,
 				18CB3D39284BB9D200AE132F /* TimerButtonComponentModel.swift in Sources */,

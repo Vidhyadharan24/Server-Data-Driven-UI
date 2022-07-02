@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 import AnyCodable
-import SwiftUI
 
 class UIBaseInputComponentModel: UIBaseComponentModel, UIInputComponentModel {
     var errorMessage: String?
@@ -20,16 +19,13 @@ class UIBaseInputComponentModel: UIBaseComponentModel, UIInputComponentModel {
         self.validate(text: "")
     }
             
-    override var view: AnyView {
-        AnyView(EmptyView())
-    }
-        
     init(key: String,
+         uiComponent: UIComponent,
          rules: ComponentStateRule? = nil,
          validations: [Validation]? = nil,
          componentAction: ComponentAction? = nil,
          notifyChange: PassthroughSubject<String, Never>,
-         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
+         performAction: PassthroughSubject<UIComponentModel, Never>) {
         self.validations = validations
         self.isMandatory = validations?.filter {
             if case .nonEmpty = $0 {
@@ -39,6 +35,7 @@ class UIBaseInputComponentModel: UIBaseComponentModel, UIInputComponentModel {
         }.count ?? 0 > 0
         
         super.init(key: key,
+                   uiComponent: uiComponent,
                    rules: rules,
                    componentAction: componentAction,
                    notifyChange: notifyChange,

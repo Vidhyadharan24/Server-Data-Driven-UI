@@ -5,7 +5,7 @@
 //  Created by Vidhyadharan Mohanram on 29/05/22.
 //
 
-import SwiftUI
+import Foundation
 import Combine
 import AnyCodable
 
@@ -13,7 +13,7 @@ class GenericViewModel: GenericViewModelProtocol {
     let uiComponentModels: [UIComponentModel]
     
     let notifyChange = PassthroughSubject<String, Never>()
-    var performAction = PassthroughSubject<UIActionComponentModel, Never>()
+    var performAction = PassthroughSubject<UIComponentModel, Never>()
     
     let repo = GenericViewRepo()
 
@@ -31,12 +31,12 @@ class GenericViewModel: GenericViewModelProtocol {
     
     func setUpBindings() {
         notifyChange.sink { [weak self] componentKey in
-            self?.uiComponentModels.forEach { $0.resetIfNeeded(onChange: componentKey) }
+            self?.uiComponentModels.forEach { _ = $0.resetIfNeeded(onChange: componentKey) }
             self?.updateViewState()
             self?.objectWillChange.send()
         }.store(in: &cancellableSet)
         
-        performAction.sink { [weak self] actionComponentModel in
+        performAction.sink { [weak self] actionComponentModel in            
             if let action = actionComponentModel.componentAction {
                 switch action {
                 case .validatedAPICall(let apiEndPoint):
@@ -56,7 +56,7 @@ class GenericViewModel: GenericViewModelProtocol {
         }.store(in: &cancellableSet)
     }
     
-    func apiCall(actionComponentModel: UIActionComponentModel,
+    func apiCall(actionComponentModel: UIComponentModel,
                  apiEndPoint: APIEndPoint) {
         updateViewState()
         objectWillChange.send()
@@ -66,7 +66,7 @@ class GenericViewModel: GenericViewModelProtocol {
         }
     }
     
-    func action(actionComponentModel: UIActionComponentModel, success: Bool) {
+    func action(actionComponentModel: UIComponentModel, success: Bool) {
         actionComponentModel.actionCompleted(success: success)
         
         updateViewState()
