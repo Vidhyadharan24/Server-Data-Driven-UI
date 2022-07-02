@@ -22,27 +22,30 @@ class UIBaseComponentModel: UIComponentModel, ObservableObject {
     @Published var isLoading: Bool = false
 
     var componentStateRules: ComponentStateRule?
-    
+    var componentAction: ComponentAction? = nil
+
     var data: [String: Set<AnyCodable>] {
         return [key: []]
     }
 
     let notifyChange: ObservableObjectPublisher
-    let performAction: PassthroughSubject<ComponentAction, Never>
+    let performAction: PassthroughSubject<UIActionComponentModel, Never>
         
     var cancellableSet = Set<AnyCancellable>()
 
     init(key: String,
          rules: ComponentStateRule?,
+         componentAction: ComponentAction? = nil,
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ComponentAction, Never>) {
+         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
         self.key = key
         self.componentStateRules = rules
+        self.componentAction = componentAction
         self.notifyChange = notifyChange
         self.performAction = performAction
     }
     
-    func actionCompleted(action: ComponentAction, success: Bool) {
+    func actionCompleted(success: Bool) {
         self.isLoading = false
     }
     

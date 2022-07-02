@@ -13,7 +13,7 @@ class GenericViewModel: GenericViewModelProtocol {
     let uiComponentModels: [UIComponentModel]
     
     let notifyChange = ObservableObjectPublisher()
-    var performAction = PassthroughSubject<ComponentAction, Never>()
+    var performAction = PassthroughSubject<UIActionComponentModel, Never>()
     
     let repo = GenericViewRepo()
 
@@ -35,41 +35,38 @@ class GenericViewModel: GenericViewModelProtocol {
             self?.objectWillChange.send()
         }.store(in: &cancellableSet)
         
-        performAction.sink { [weak self] action in
-            switch action {
-            case .validatedAPICall(let key):
-                guard self?.validate() == nil else {
-                    self?.action(key: key,
-                                 action: action,
-                                 success: false)
-                    return
+        performAction.sink { [weak self] actionComponentModel in
+            if let action = actionComponentModel.componentAction {
+                switch action {
+                case .validatedAPICall(let apiEndPoint):
+                    guard self?.validate() == nil else {
+                        self?.action(actionComponentModel: actionComponentModel,
+                                     success: false)
+                        return
+                    }
+                    self?.apiCall(actionComponentModel: actionComponentModel,
+                                  apiEndPoint: apiEndPoint)
+                case .apiCall(let apiEndPoint):
+                    self?.apiCall(actionComponentModel: actionComponentModel,
+                                  apiEndPoint: apiEndPoint)
+                default: break
                 }
-                self?.apiCall(key: key,
-                              action: action)
-            case .apiCall(let key):
-                self?.apiCall(key: key,
-                              action: action)
-            default: break
             }
         }.store(in: &cancellableSet)
     }
     
-    func apiCall(key: String,
-                 action: ComponentAction) {
+    func apiCall(actionComponentModel: UIActionComponentModel,
+                 apiEndPoint: APIEndPoint) {
         updateViewState()
         objectWillChange.send()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            self?.action(key: key, action: action, success: true)
+            self?.action(actionComponentModel: actionComponentModel, success: true)
         }
     }
     
-    func action(key: String,
-                action: ComponentAction,
-                success: Bool) {
-        let vm: UIComponentModel? = uiComponentModels.filter { $0.key == key }.last
-        vm?.actionCompleted(action: action,
-                            success: success)
+    func action(actionComponentModel: UIActionComponentModel, success: Bool) {
+        actionComponentModel.actionCompleted(success: success)
         
         updateViewState()
         objectWillChange.send()

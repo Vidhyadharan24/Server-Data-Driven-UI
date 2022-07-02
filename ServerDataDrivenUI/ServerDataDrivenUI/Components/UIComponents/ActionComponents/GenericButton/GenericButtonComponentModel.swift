@@ -11,13 +11,21 @@ import AnyCodable
 
 class GenericButtonComponentModel: UIBaseActionComponentModel {
     @Published var title: String
-    var action: (() -> Void)?
 
     override var view: AnyView {
         AnyView(GenericButtonComponent(componentModel: self))
     }
     
     override var data: [String: Set<AnyCodable>] {
+        guard let componentAction = componentAction else { return [:] }
+        let key: String
+        switch componentAction {
+        case .refresh(let apiEndPoint),
+                .apiCall(let apiEndPoint),
+                .validatedAPICall(let apiEndPoint):
+            key = apiEndPoint.key
+        case .displayScreen: return [:]
+        }
         if !isLoading {
             return [key: [AnyCodable(actionPerformed)]]
         } else {
@@ -29,14 +37,16 @@ class GenericButtonComponentModel: UIBaseActionComponentModel {
     init(key: String,
          rules: ComponentStateRule? = nil,
          validations: [Validation] = [],
+         componentAction: ComponentAction? = nil,
          title: String,
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ComponentAction, Never>) {
+         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
 
         self.title = title
                 
         super.init(key: key,
                    rules: rules,
+                   componentAction: componentAction,
                    notifyChange: notifyChange,
                    performAction: performAction)
     }
@@ -45,6 +55,6 @@ class GenericButtonComponentModel: UIBaseActionComponentModel {
         self.hideKeyboard()
         
         self.isLoading = true
-        self.performAction.send(.validatedAPICall(key))
+        self.performAction.send(self)
     }
 }

@@ -20,13 +20,13 @@ protocol UIComponentModel: AnyObject {
     var componentStateRules: ComponentStateRule? { get }
 
     var notifyChange: ObservableObjectPublisher { get }
-    var performAction: PassthroughSubject<ComponentAction, Never> { get }
+    var performAction: PassthroughSubject<UIActionComponentModel, Never> { get }
     
     func updateState(currentValues: [String: Set<AnyCodable>])
     
     var data: [String: Set<AnyCodable>] { get }
     
-    func actionCompleted(action: ComponentAction, success: Bool)
+    func actionCompleted(success: Bool)
 }
 
 extension UIComponentModel {

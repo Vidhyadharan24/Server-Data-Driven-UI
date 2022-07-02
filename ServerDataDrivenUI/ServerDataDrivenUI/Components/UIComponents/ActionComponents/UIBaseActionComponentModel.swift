@@ -9,9 +9,9 @@ import Foundation
 
 class UIBaseActionComponentModel: UIBaseComponentModel, UIActionComponentModel {
     var actionPerformed: Bool = false
-    
-    override func actionCompleted(action: ComponentAction, success: Bool) {
-        super.actionCompleted(action: action, success: success)
+
+    override func actionCompleted(success: Bool) {
+        super.actionCompleted(success: success)
         self.actionPerformed = success
     }
 }

@@ -45,7 +45,7 @@
           ],
           "component_state_rules": {
             "hideOn": {
-              "send_otp": [
+              "send_otp_api": [
                 false
               ]
             },
@@ -63,7 +63,7 @@
           "title": "Send OTP",
           "component_state_rules": {
             "hideOn": {
-              "send_otp": [
+              "send_otp_api": [
                 true
               ]
             },
@@ -71,6 +71,13 @@
               "loading": [
                 true
               ]
+            }
+          },
+          "component_action": {
+            "validated_api_call": {
+              "key": "send_otp_api",
+              "path": "/v1/login/sendotp",
+              "method": "GET"
             }
           }
         }
@@ -81,7 +88,7 @@
           "title": "Verify OTP",
           "component_state_rules": {
             "hideOn": {
-              "send_otp": [
+              "send_otp_api": [
                 false
               ]
             },
@@ -89,6 +96,13 @@
               "loading": [
                 true
               ]
+            }
+          },
+          "component_action": {
+            "validated_api_call": {
+              "key": "verify_otp_api",
+              "path": "/v1/login/verifyotp",
+              "method": "GET"
             }
           }
         }
@@ -100,7 +114,7 @@
           "count_down_duration": 60,
           "component_state_rules": {
             "hideOn": {
-              "send_otp": [
+              "send_otp_api": [
                 false
               ]
             },
@@ -109,10 +123,16 @@
                 true
               ]
             }
+          },
+          "component_action": {
+            "validated_api_call": {
+              "key": "resend_otp_api",
+              "path": "/v1/login/resendotp",
+              "method": "GET"
+            }
           }
         }
       }
     ]
   }
 }
-

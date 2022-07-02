@@ -18,6 +18,15 @@ class TimerButtonComponentModel: UIBaseActionComponentModel {
     }
     
     override var data: [String: Set<AnyCodable>] {
+        guard let componentAction = componentAction else { return [:] }
+        let key: String
+        switch componentAction {
+        case .refresh(let apiEndPoint),
+                .apiCall(let apiEndPoint),
+                .validatedAPICall(let apiEndPoint):
+            key = apiEndPoint.key
+        case .displayScreen: return [:]
+        }
         if !isLoading {
             return [key: [AnyCodable(actionPerformed)]]
         } else {
@@ -39,9 +48,10 @@ class TimerButtonComponentModel: UIBaseActionComponentModel {
          rules: ComponentStateRule? = nil,
          validations: [Validation] = [],
          title: String,
+         componentAction: ComponentAction? = nil,
          countDownDuration: Int,
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ComponentAction, Never>) {
+         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
 
         self.title = title
         self.buttonTitle = title
@@ -49,6 +59,7 @@ class TimerButtonComponentModel: UIBaseActionComponentModel {
                 
         super.init(key: key,
                    rules: rules,
+                   componentAction: componentAction,
                    notifyChange: notifyChange,
                    performAction: performAction)
         
@@ -67,11 +78,11 @@ class TimerButtonComponentModel: UIBaseActionComponentModel {
         self.hideKeyboard()
         
         self.isLoading = true
-        self.performAction.send(.apiCall(key))
+        self.performAction.send(self)
     }
     
-    override func actionCompleted(action: ComponentAction, success: Bool) {
-        super.actionCompleted(action: action, success: success)
+    override func actionCompleted(success: Bool) {
+        super.actionCompleted(success: success)
         startTimer()
     }
     

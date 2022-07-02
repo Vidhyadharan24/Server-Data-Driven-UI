@@ -34,11 +34,12 @@ class PhoneFieldComponentModel: UIBaseInputComponentModel {
     init(key: String,
          rules: ComponentStateRule? = nil,
          validations: [Validation] = [],
+         componentAction: ComponentAction? = nil,
          countries: [Country],
          selectedCountryCode: String,
          phoneNumber: String = "",
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ComponentAction, Never>) {
+         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
         self.countries = countries
         self.selectedCountryCode = selectedCountryCode
         self.phoneNumber = phoneNumber
@@ -46,6 +47,7 @@ class PhoneFieldComponentModel: UIBaseInputComponentModel {
         super.init(key: key,
                    rules: rules,
                    validations: validations,
+                   componentAction: componentAction,
                    notifyChange: notifyChange,
                    performAction: performAction)
         

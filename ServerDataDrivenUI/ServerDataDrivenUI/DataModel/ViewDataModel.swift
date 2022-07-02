@@ -48,12 +48,14 @@ struct PhoneComponentDataModel: ComponentDataModel {
     let countryCodeKey: String
     let phoneNumberKey: String
     let componentStateRules: ComponentStateRule?
-    
+    let componentAction: ComponentAction?
+
     enum CodingKeys: String, CodingKey {
         case key
         case countryCodeKey = "country_code_key"
         case phoneNumberKey = "phone_number_key"
         case componentStateRules = "component_state_rules"
+        case componentAction = "component_action"
     }
 }
 
@@ -63,13 +65,15 @@ struct TextFieldComponentDataModel: ComponentDataModel {
     let placeholder: String?
     let validations: [Validation]?
     let componentStateRules: ComponentStateRule?
-    
+    let componentAction: ComponentAction?
+
     enum CodingKeys: String, CodingKey {
         case key
         case defaultText = "default_text"
         case placeholder
         case validations
         case componentStateRules = "component_state_rules"
+        case componentAction = "component_action"
     }
 }
 
@@ -77,13 +81,13 @@ struct ButtonComponentDataModel: ComponentDataModel {
     let key: String
     let title: String
     let componentStateRules: ComponentStateRule?
-    let apiEndPoint: APIEndPoint?
+    let componentAction: ComponentAction?
     
     enum CodingKeys: String, CodingKey {
         case key
         case title
         case componentStateRules = "component_state_rules"
-        case apiEndPoint = "api_end_point"
+        case componentAction = "component_action"
     }
 }
 
@@ -92,13 +96,13 @@ struct TimerButtonComponentDataModel: ComponentDataModel {
     let title: String
     let countDownDuration: Int
     let componentStateRules: ComponentStateRule?
-    let apiEndPoint: APIEndPoint?
-    
+    let componentAction: ComponentAction?
+
     enum CodingKeys: String, CodingKey {
         case key
         case title
         case countDownDuration = "count_down_duration"
         case componentStateRules = "component_state_rules"
-        case apiEndPoint = "api_end_point"
+        case componentAction = "component_action"
     }
 }

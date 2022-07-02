@@ -38,17 +38,17 @@ struct GenericButtonComponent: View {
 
 struct GenericButton_Previews: PreviewProvider {
     static var previews: some View {
-        let vm = GenericButtonComponentModel(key: "",
-                                        title: "Button",
+        let vm = GenericButtonComponentModel(key: "send_otp",
+                                        title: "Send OTP",
                                         notifyChange: ObservableObjectPublisher(),
-         performAction: PassthroughSubject<ComponentAction, Never>())
+         performAction: PassthroughSubject<UIActionComponentModel, Never>())
         vm.isLoading = true
         return Group {
-            GenericButtonComponent(componentModel: GenericButtonComponentModel(key: "",
-                                                            title: "Button",
-                                                            notifyChange: ObservableObjectPublisher(),
-                                                            performAction: PassthroughSubject<ComponentAction, Never>()))
             GenericButtonComponent(componentModel: vm)
+            GenericButtonComponent(componentModel: GenericButtonComponentModel(key: "verify_otp",
+                                                            title: "Verify OTP",
+                                                            notifyChange: ObservableObjectPublisher(),
+                                                            performAction: PassthroughSubject<UIActionComponentModel, Never>()))
         }
     }
 }

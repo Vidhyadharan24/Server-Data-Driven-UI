@@ -34,7 +34,7 @@ extension UIInputComponentModel {
     
     @discardableResult func validate(text: String) -> String? {
         if !isMandatory, text.count == 0 {
-            return true
+            return nil
         }
         
         if let validations = validations {

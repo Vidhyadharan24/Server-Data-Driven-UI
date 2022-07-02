@@ -23,15 +23,17 @@ class TitleSubtitleComponentModel: UIBaseComponentModel {
 
     init(key: String,
          rules: ComponentStateRule? = nil,
+         componentAction: ComponentAction? = nil,
          title: String,
          subtitles: [String],
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ComponentAction, Never>) {
+         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
         self.title = title
         self.subtitles = subtitles
         
         super.init(key: key,
                    rules: rules,
+                   componentAction: componentAction,
                    notifyChange: notifyChange,
                    performAction: performAction)
     }

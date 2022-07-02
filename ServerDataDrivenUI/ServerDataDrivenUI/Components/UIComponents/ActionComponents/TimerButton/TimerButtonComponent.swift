@@ -39,9 +39,13 @@ struct TimerButtonComponent: View {
 
 struct TimerButton_Previews: PreviewProvider {
     static var previews: some View {
-        GenericButtonComponent(componentModel: GenericButtonComponentModel(key: "",
-                                                        title: "Resend OTP",
-                                                        notifyChange: ObservableObjectPublisher(),
-                                                        performAction: PassthroughSubject<ComponentAction, Never>()))
+        let notifyChange = ObservableObjectPublisher()
+        let performAction = PassthroughSubject<UIActionComponentModel, Never>()
+        let componentModel = TimerButtonComponentModel(key: "resend_otp",
+                                                       title: "Resend OTP",
+                                                       countDownDuration: 60,
+                                                       notifyChange: notifyChange,
+                                                       performAction: performAction)
+        return TimerButtonComponent(componentModel: componentModel)
     }
 }

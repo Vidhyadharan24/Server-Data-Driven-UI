@@ -10,4 +10,5 @@ import Combine
 
 protocol UIActionComponentModel: UIComponentModel {
     var actionPerformed: Bool { get set }
+    var componentAction: ComponentAction? { get }
 }

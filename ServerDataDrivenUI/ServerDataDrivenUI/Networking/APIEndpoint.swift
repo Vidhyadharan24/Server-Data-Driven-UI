@@ -25,9 +25,9 @@ public struct APIEndPoint: Codable {
     let key: String
     let path: String
     let method: HTTPMethod
-    let headerParamaters: [String: String]
-    var queryParameters: [String: AnyCodable]
-    var bodyParameters: [String: AnyCodable]
+    let headerParamaters: [String: String]? = [:]
+    var queryParameters: [String: AnyCodable]? = [:]
+    var bodyParameters: [String: AnyCodable]? = [:]
     
     mutating func set(queryParameters: [String: AnyCodable] = [:],
                       bodyParameters: [String: AnyCodable] = [:]) {
@@ -39,10 +39,10 @@ public struct APIEndPoint: Codable {
         let url = try self.url(with: apiConfig)
         var urlRequest = URLRequest(url: url)
         var allHeaders: [String: String] = apiConfig.headers
-        headerParamaters.forEach { allHeaders.updateValue($1, forKey: $0) }
+        headerParamaters?.forEach { allHeaders.updateValue($1, forKey: $0) }
 
-        if !bodyParameters.isEmpty {
-            urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: bodyParameters)
+        if let params = bodyParameters, !params.isEmpty {
+            urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: params)
         }
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = allHeaders
@@ -56,7 +56,7 @@ public struct APIEndPoint: Codable {
         guard var urlComponents = URLComponents(string: endpoint) else { throw RequestGenerationError.components }
         var urlQueryItems = [URLQueryItem]()
 
-        queryParameters.forEach {
+        queryParameters?.forEach {
             urlQueryItems.append(URLQueryItem(name: $0.key, value: "\($0.value)"))
         }
         apiConfig.queryParameters.forEach {

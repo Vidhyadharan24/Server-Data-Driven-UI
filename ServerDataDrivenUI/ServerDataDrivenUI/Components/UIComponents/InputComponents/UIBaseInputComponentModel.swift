@@ -27,8 +27,9 @@ class UIBaseInputComponentModel: UIBaseComponentModel, UIInputComponentModel {
     init(key: String,
          rules: ComponentStateRule? = nil,
          validations: [Validation]? = nil,
+         componentAction: ComponentAction? = nil,
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ComponentAction, Never>) {
+         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
         self.validations = validations
         self.isMandatory = validations?.filter {
             if case .nonEmpty = $0 {
@@ -39,6 +40,7 @@ class UIBaseInputComponentModel: UIBaseComponentModel, UIInputComponentModel {
         
         super.init(key: key,
                    rules: rules,
+                   componentAction: componentAction,
                    notifyChange: notifyChange,
                    performAction: performAction)
     }

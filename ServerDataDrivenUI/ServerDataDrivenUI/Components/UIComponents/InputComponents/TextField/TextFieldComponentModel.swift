@@ -36,16 +36,18 @@ class TextFieldComponentModel: UIBaseInputComponentModel {
     init(key: String,
          rules: ComponentStateRule? = nil,
          validations: [Validation]? = nil,
+         componentAction: ComponentAction? = nil,
          text: String,
          placeholder: String,
          notifyChange: ObservableObjectPublisher,
-         performAction: PassthroughSubject<ComponentAction, Never>) {
+         performAction: PassthroughSubject<UIActionComponentModel, Never>) {
         self.text = text
         self.placeholder = placeholder
 
         super.init(key: key,
                    rules: rules,
                    validations: validations,
+                   componentAction: componentAction,
                    notifyChange: notifyChange,
                    performAction: performAction)
                 

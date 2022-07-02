@@ -27,11 +27,14 @@ struct TitleSubtitleComponent: View {
 
 struct TitleSubtitleView_Previews: PreviewProvider {
     static var previews: some View {
-        TitleSubtitleComponent(componentModel: TitleSubtitleComponentModel(key: "title_subtitle_view",
-                                                            title: "Title",
-                                                            subtitles: ["Subtitle 1",
-                                                                        "Subtitle 2"],
-                                                            notifyChange: ObservableObjectPublisher(),
-                                                            performAction: PassthroughSubject<ComponentAction, Never>()))
+        let notifyChange = ObservableObjectPublisher()
+        let performAction = PassthroughSubject<UIActionComponentModel, Never>()
+        let componentModel = TitleSubtitleComponentModel(key: "title_subtitle_view",
+                                                         title: "Title",
+                                                         subtitles: ["Subtitle 1",
+                                                                     "Subtitle 2"],
+                                                         notifyChange: notifyChange,
+                                                         performAction: performAction)
+        return TitleSubtitleComponent(componentModel: componentModel)
     }
 }
