@@ -39,20 +39,30 @@ struct GenericButtonComponent: View {
 
 struct GenericButton_Previews: PreviewProvider {
     static var previews: some View {
+        let sendOTPDataModel = ButtonComponentDataModel(key: "send_otp",
+                                                        uiComponent: .genericButton,
+                                                        title: "Send OTP",
+                                                        validations: nil,
+                                                        componentStateRules: nil,
+                                                        componentAction: nil)
+        
+        let verifyOTPDataModel = ButtonComponentDataModel(key: "verify_otp",
+                                                          uiComponent: .genericButton,
+                                                          title: "Verify OTP",
+                                                          validations: nil,
+                                                          componentStateRules: nil,
+                                                          componentAction: nil)
+        
         let notifyChange = PassthroughSubject<String, Never>()
         let performAction = PassthroughSubject<UIComponentModel, Never>()
         
-        let vm = GenericButtonComponentModel(key: "send_otp",
-                                             uiComponent: .genericButton,
-                                             title: "Send OTP",
+        let vm = GenericButtonComponentModel(componentDataModel: sendOTPDataModel,
                                              notifyChange: notifyChange,
                                              performAction: performAction)
         vm.isLoading = true
         return Group {
             GenericButtonComponent(componentModel: vm)
-            GenericButtonComponent(componentModel: GenericButtonComponentModel(key: "verify_otp",
-                                                                               uiComponent: .genericButton,
-                                                                               title: "Verify OTP",
+            GenericButtonComponent(componentModel: GenericButtonComponentModel(componentDataModel: verifyOTPDataModel,
                                                                                notifyChange: notifyChange,
                                                                                performAction: performAction))
         }

@@ -9,15 +9,13 @@ import Combine
 import AnyCodable
 
 protocol UIComponentModel: AnyObject {
-    var key: String { get }
-    var uiComponent: UIComponent { get }
+    var componentDataModel: ComponentDataModel { get }
+    
     var isHidden: Bool { get set }
     var isDisabled: Bool { get set }
     var isLoading: Bool { get set }
 
     var actionPerformed: Bool { get set }
-    var componentStateRules: ComponentStateRule? { get }
-    var componentAction: ComponentAction? { get }
 
     var notifyChange: PassthroughSubject<String, Never> { get }
     func resetIfNeeded(onChange: String) -> Bool
@@ -32,7 +30,7 @@ protocol UIComponentModel: AnyObject {
 extension UIComponentModel {
         
     func updateState(currentValues: [String: Set<AnyCodable>]) {
-        if let hidingRules = componentStateRules?.hideOn {
+        if let hidingRules = componentDataModel.componentStateRules?.hideOn {
             for (rule, values) in hidingRules {
                 if let currentRuleValues = currentValues[rule] {
                     if #available(iOS 16.0, *) {
@@ -45,7 +43,7 @@ extension UIComponentModel {
                 }
             }
         }
-        if let disableOnRules = componentStateRules?.disableOn {
+        if let disableOnRules = componentDataModel.componentStateRules?.disableOn {
             for (rule, values) in disableOnRules {
                 if let currentRuleValues = currentValues[rule] {
                     if #available(iOS 16.0, *) {

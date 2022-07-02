@@ -25,26 +25,16 @@ class TextFieldComponentModel: UIBaseInputComponentModel {
     }
     
     override var data: [String: Set<AnyCodable>] {
-        [key: [AnyCodable(text)]]
+        [componentDataModel.key: [AnyCodable(text)]]
     }
 
-    init(key: String,
-         uiComponent: UIComponent,
-         rules: ComponentStateRule? = nil,
-         validations: [Validation]? = nil,
-         componentAction: ComponentAction? = nil,
-         text: String,
-         placeholder: String,
+    init(componentDataModel: TextFieldComponentDataModel,
          notifyChange: PassthroughSubject<String, Never>,
          performAction: PassthroughSubject<UIComponentModel, Never>) {
-        self.text = text
-        self.placeholder = placeholder
+        self.text = componentDataModel.defaultText ?? ""
+        self.placeholder = componentDataModel.placeholder ?? ""
 
-        super.init(key: key,
-                   uiComponent: uiComponent,
-                   rules: rules,
-                   validations: validations,
-                   componentAction: componentAction,
+        super.init(componentDataModel: componentDataModel,
                    notifyChange: notifyChange,
                    performAction: performAction)
                 
@@ -55,7 +45,7 @@ class TextFieldComponentModel: UIBaseInputComponentModel {
         $text.sink { [weak self] text in
             guard let self = self else { return }
             self.validate(text: text)
-            self.notifyChange.send(self.key)
+            self.notifyChange.send(self.componentDataModel.key)
         }.store(in: &cancellableSet)
     }
 }

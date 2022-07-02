@@ -11,7 +11,7 @@ import SwiftUI
 class UIComponentFactory {
     
     static func component(for componentModel: UIComponentModel) -> AnyView? {
-        switch componentModel.uiComponent {
+        switch componentModel.componentDataModel.uiComponent {
         case UIComponent.phoneNumber where componentModel is PhoneFieldComponentModel:
             return AnyView(PhoneFieldComponent(componentModel: componentModel as! PhoneFieldComponentModel))
         case UIComponent.textField where componentModel is TextFieldComponentModel:
@@ -21,7 +21,7 @@ class UIComponentFactory {
         case UIComponent.timerButton where componentModel is TimerButtonComponentModel:
             return AnyView(TimerButtonComponent(componentModel: componentModel as! TimerButtonComponentModel))
         default:
-            print("Invalid config \(componentModel.uiComponent)")
+            print("Invalid config \(componentModel.componentDataModel.uiComponent)")
             return nil
         }
     }

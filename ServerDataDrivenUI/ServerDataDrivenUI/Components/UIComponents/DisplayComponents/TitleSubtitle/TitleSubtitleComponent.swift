@@ -25,17 +25,17 @@ struct TitleSubtitleComponent: View {
     }
 }
 
-struct TitleSubtitleView_Previews: PreviewProvider {
-    static var previews: some View {
-        let notifyChange = PassthroughSubject<String, Never>()
-        let performAction = PassthroughSubject<UIComponentModel, Never>()
-        let componentModel = TitleSubtitleComponentModel(key: "title_subtitle_view",
-                                                         uiComponent: .titleSubtitle,
-                                                         title: "Title",
-                                                         subtitles: ["Subtitle 1",
-                                                                     "Subtitle 2"],
-                                                         notifyChange: notifyChange,
-                                                         performAction: performAction)
-        return TitleSubtitleComponent(componentModel: componentModel)
-    }
-}
+//struct TitleSubtitleView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let notifyChange = PassthroughSubject<String, Never>()
+//        let performAction = PassthroughSubject<UIComponentModel, Never>()
+//        let componentModel = TitleSubtitleComponentModel(key: "title_subtitle_view",
+//                                                         uiComponent: .titleSubtitle,
+//                                                         title: "Title",
+//                                                         subtitles: ["Subtitle 1",
+//                                                                     "Subtitle 2"],
+//                                                         notifyChange: notifyChange,
+//                                                         performAction: performAction)
+//        return TitleSubtitleComponent(componentModel: componentModel)
+//    }
+//}

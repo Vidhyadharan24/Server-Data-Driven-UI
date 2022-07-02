@@ -17,7 +17,7 @@ class PhoneFieldComponentModel: UIBaseInputComponentModel {
     }
     
     override var data: [String: Set<AnyCodable>] {
-        [key: [AnyCodable(phoneNumber)]]
+        [componentDataModel.key: [AnyCodable(phoneNumber)]]
     }
         
     let countries: [Country]
@@ -25,11 +25,7 @@ class PhoneFieldComponentModel: UIBaseInputComponentModel {
         Array(countries.map { $0.code })
     }
 
-    init(key: String,
-         uiComponent: UIComponent,
-         rules: ComponentStateRule? = nil,
-         validations: [Validation] = [],
-         componentAction: ComponentAction? = nil,
+    init(componentDataModel: PhoneComponentDataModel,
          countries: [Country],
          selectedCountryCode: String,
          phoneNumber: String = "",
@@ -39,11 +35,7 @@ class PhoneFieldComponentModel: UIBaseInputComponentModel {
         self.selectedCountryCode = selectedCountryCode
         self.phoneNumber = phoneNumber
 
-        super.init(key: key,
-                   uiComponent: uiComponent,
-                   rules: rules,
-                   validations: validations,
-                   componentAction: componentAction,
+        super.init(componentDataModel: componentDataModel,
                    notifyChange: notifyChange,
                    performAction: performAction)
         
@@ -62,7 +54,7 @@ class PhoneFieldComponentModel: UIBaseInputComponentModel {
             .sink {[weak self] text in
                 guard let self = self else { return }
                 self.validatePhoneNo(text: text)
-                self.notifyChange.send(self.key)
+                self.notifyChange.send(self.componentDataModel.key)
             }.store(in: &cancellableSet)
     }
     

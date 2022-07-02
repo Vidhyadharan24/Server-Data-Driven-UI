@@ -19,39 +19,21 @@ struct ComponentModelFactory {
                                performAction: PassthroughSubject<UIComponentModel, Never>) -> UIComponentModel {
         switch dataModel {
         case .phoneNumber(let dataModel):
-            return PhoneFieldComponentModel(key: dataModel.key,
-                                            uiComponent: dataModel.uiComponent,
-                                            rules: dataModel.componentStateRules,
-                                            componentAction: dataModel.componentAction,
+            return PhoneFieldComponentModel(componentDataModel: dataModel,
                                             countries: enumDataModel.countries,
                                             selectedCountryCode: enumDataModel.countries.first!.code,
                                             notifyChange: notifyChange,
                                             performAction: performAction)
         case .textField(let dataModel):
-            return TextFieldComponentModel(key: dataModel.key,
-                                           uiComponent: dataModel.uiComponent,
-                                           rules: dataModel.componentStateRules,
-                                           validations: dataModel.validations,
-                                           componentAction: dataModel.componentAction,
-                                           text: "",
-                                           placeholder: "Login OTP",
+            return TextFieldComponentModel(componentDataModel: dataModel,
                                            notifyChange: notifyChange,
                                            performAction: performAction)
         case .button(let dataModel):
-            return GenericButtonComponentModel(key: dataModel.key,
-                                               uiComponent: dataModel.uiComponent,
-                                               rules: dataModel.componentStateRules,
-                                               componentAction: dataModel.componentAction,
-                                               title: dataModel.title,
+            return GenericButtonComponentModel(componentDataModel: dataModel,
                                                notifyChange: notifyChange,
                                                performAction: performAction)
         case .timerButton(let dataModel):
-            return TimerButtonComponentModel(key: dataModel.key,
-                                             uiComponent: dataModel.uiComponent,
-                                             rules: dataModel.componentStateRules,
-                                             title: dataModel.title,
-                                             componentAction: dataModel.componentAction,
-                                             countDownDuration: 60,
+            return TimerButtonComponentModel(componentDataModel: dataModel,
                                              notifyChange: notifyChange,
                                              performAction: performAction)
         }

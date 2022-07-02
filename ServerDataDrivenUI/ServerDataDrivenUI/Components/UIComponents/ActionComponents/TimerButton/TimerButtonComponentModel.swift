@@ -14,7 +14,7 @@ class TimerButtonComponentModel: UIBaseComponentModel {
     var action: (() -> Void)?
     
     override var data: [String: Set<AnyCodable>] {
-        guard let componentAction = componentAction else { return [:] }
+        guard let componentAction = componentDataModel.componentAction else { return [:] }
         let key: String
         switch componentAction {
         case .refresh(let apiEndPoint),
@@ -40,24 +40,15 @@ class TimerButtonComponentModel: UIBaseComponentModel {
     
     private var buttonTitle: String
 
-    init(key: String,
-         uiComponent: UIComponent,
-         rules: ComponentStateRule? = nil,
-         validations: [Validation] = [],
-         title: String,
-         componentAction: ComponentAction? = nil,
-         countDownDuration: Int,
+    init(componentDataModel: TimerButtonComponentDataModel,
          notifyChange: PassthroughSubject<String, Never>,
          performAction: PassthroughSubject<UIComponentModel, Never>) {
 
-        self.title = title
-        self.buttonTitle = title
-        self.countDownDuration = countDownDuration
+        self.title = componentDataModel.title
+        self.buttonTitle = componentDataModel.title
+        self.countDownDuration = componentDataModel.countDownDuration
                 
-        super.init(key: key,
-                   uiComponent: uiComponent,
-                   rules: rules,
-                   componentAction: componentAction,
+        super.init(componentDataModel: componentDataModel,
                    notifyChange: notifyChange,
                    performAction: performAction)
         

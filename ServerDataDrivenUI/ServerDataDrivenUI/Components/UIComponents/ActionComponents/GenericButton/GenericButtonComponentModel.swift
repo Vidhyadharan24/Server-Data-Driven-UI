@@ -12,7 +12,7 @@ class GenericButtonComponentModel: UIBaseComponentModel {
     @Published var title: String
     
     override var data: [String: Set<AnyCodable>] {
-        guard let componentAction = componentAction else { return [:] }
+        guard let componentAction = componentDataModel.componentAction else { return [:] }
         let key: String
         switch componentAction {
         case .refresh(let apiEndPoint),
@@ -29,21 +29,13 @@ class GenericButtonComponentModel: UIBaseComponentModel {
         }
     }
         
-    init(key: String,
-         uiComponent: UIComponent,
-         rules: ComponentStateRule? = nil,
-         validations: [Validation] = [],
-         componentAction: ComponentAction? = nil,
-         title: String,
+    init(componentDataModel: ButtonComponentDataModel,
          notifyChange: PassthroughSubject<String, Never>,
          performAction: PassthroughSubject<UIComponentModel, Never>) {
 
-        self.title = title
+        self.title = componentDataModel.title
                 
-        super.init(key: key,
-                   uiComponent: uiComponent,
-                   rules: rules,
-                   componentAction: componentAction,
+        super.init(componentDataModel: componentDataModel,
                    notifyChange: notifyChange,
                    performAction: performAction)
     }

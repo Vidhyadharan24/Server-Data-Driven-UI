@@ -37,7 +37,7 @@ class GenericViewModel: GenericViewModelProtocol {
         }.store(in: &cancellableSet)
         
         performAction.sink { [weak self] actionComponentModel in            
-            if let action = actionComponentModel.componentAction {
+            if let action = actionComponentModel.componentDataModel.componentAction {
                 switch action {
                 case .validatedAPICall(let apiEndPoint):
                     guard self?.validate() == nil else {

@@ -41,13 +41,20 @@ enum UIComponentDataModel: Codable {
     }
 }
 
-protocol ComponentDataModel: Codable {}
+protocol ComponentDataModel: Codable {
+    var key: String { get }
+    var uiComponent: UIComponent { get }
+    var validations: [Validation]? { get }
+    var componentStateRules: ComponentStateRule? { get }
+    var componentAction: ComponentAction? { get }
+}
 
 struct PhoneComponentDataModel: ComponentDataModel {
     let key: String
     let uiComponent: UIComponent
     let countryCodeKey: String
     let phoneNumberKey: String
+    let validations: [Validation]?
     let componentStateRules: ComponentStateRule?
     let componentAction: ComponentAction?
 
@@ -56,6 +63,7 @@ struct PhoneComponentDataModel: ComponentDataModel {
         case uiComponent = "ui_component"
         case countryCodeKey = "country_code_key"
         case phoneNumberKey = "phone_number_key"
+        case validations
         case componentStateRules = "component_state_rules"
         case componentAction = "component_action"
     }
@@ -85,6 +93,7 @@ struct ButtonComponentDataModel: ComponentDataModel {
     let key: String
     let uiComponent: UIComponent
     let title: String
+    let validations: [Validation]?
     let componentStateRules: ComponentStateRule?
     let componentAction: ComponentAction?
     
@@ -92,6 +101,7 @@ struct ButtonComponentDataModel: ComponentDataModel {
         case key
         case uiComponent = "ui_component"
         case title
+        case validations
         case componentStateRules = "component_state_rules"
         case componentAction = "component_action"
     }
@@ -102,6 +112,7 @@ struct TimerButtonComponentDataModel: ComponentDataModel {
     let uiComponent: UIComponent
     let title: String
     let countDownDuration: Int
+    let validations: [Validation]?
     let componentStateRules: ComponentStateRule?
     let componentAction: ComponentAction?
 
@@ -110,6 +121,7 @@ struct TimerButtonComponentDataModel: ComponentDataModel {
         case uiComponent = "ui_component"
         case title
         case countDownDuration = "count_down_duration"
+        case validations
         case componentStateRules = "component_state_rules"
         case componentAction = "component_action"
     }

@@ -40,12 +40,16 @@ struct TimerButtonComponent: View {
 
 struct TimerButton_Previews: PreviewProvider {
     static var previews: some View {
+        let componentDataModel = TimerButtonComponentDataModel(key: "resend_otp",
+                                                               uiComponent: .timerButton,
+                                                               title: "Resend OTP",
+                                                               countDownDuration: 60,
+                                                               validations: nil,
+                                                               componentStateRules: nil,
+                                                               componentAction: nil)
         let notifyChange = PassthroughSubject<String, Never>()
         let performAction = PassthroughSubject<UIComponentModel, Never>()
-        let componentModel = TimerButtonComponentModel(key: "resend_otp",
-                                                       uiComponent: .timerButton,
-                                                       title: "Resend OTP",
-                                                       countDownDuration: 60,
+        let componentModel = TimerButtonComponentModel(componentDataModel: componentDataModel,
                                                        notifyChange: notifyChange,
                                                        performAction: performAction)
         return TimerButtonComponent(componentModel: componentModel)

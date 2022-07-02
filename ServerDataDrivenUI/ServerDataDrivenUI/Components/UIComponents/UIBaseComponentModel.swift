@@ -10,19 +10,16 @@ import Combine
 import AnyCodable
 
 class UIBaseComponentModel: UIComponentModel, ObservableObject {
-    var key: String
-    var uiComponent: UIComponent
+    let componentDataModel: ComponentDataModel
+
+    var actionPerformed: Bool = false
     
     @Published var isHidden: Bool = false
     @Published var isDisabled: Bool = false
     @Published var isLoading: Bool = false
 
-    var componentStateRules: ComponentStateRule?
-    var componentAction: ComponentAction? = nil
-    var actionPerformed: Bool = false
-
     var data: [String: Set<AnyCodable>] {
-        return [key: []]
+        return [componentDataModel.key: []]
     }
 
     let notifyChange: PassthroughSubject<String, Never>
@@ -30,25 +27,20 @@ class UIBaseComponentModel: UIComponentModel, ObservableObject {
         
     var cancellableSet = Set<AnyCancellable>()
 
-    init(key: String,
-         uiComponent: UIComponent,
-         rules: ComponentStateRule?,
-         componentAction: ComponentAction? = nil,
+    init(componentDataModel: ComponentDataModel,
          notifyChange: PassthroughSubject<String, Never>,
          performAction: PassthroughSubject<UIComponentModel, Never>) {
-        self.key = key
-        self.uiComponent = uiComponent
-        self.componentStateRules = rules
-        self.componentAction = componentAction
+        self.componentDataModel = componentDataModel
+        
         self.notifyChange = notifyChange
         self.performAction = performAction
     }
     
     @discardableResult func resetIfNeeded(onChange: String) -> Bool {
-        guard let shouldReset = componentStateRules?.resetOnChange?.contains(onChange),
+        guard let shouldReset = componentDataModel.componentStateRules?.resetOnChange?.contains(onChange),
               shouldReset else { return false }
         self.actionPerformed = false
-        self.notifyChange.send(key)
+        self.notifyChange.send(componentDataModel.key)
         return true
     }
     

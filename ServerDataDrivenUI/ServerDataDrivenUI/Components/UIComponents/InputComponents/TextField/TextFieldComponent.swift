@@ -32,12 +32,16 @@ struct TextFieldComponent: View {
 
 struct TextView_Previews: PreviewProvider {
     static var previews: some View {
+        let componentDataModel = TextFieldComponentDataModel(key: "otp",
+                                                             uiComponent: .textField,
+                                                             defaultText: "",
+                                                             placeholder: "",
+                                                             validations: nil,
+                                                             componentStateRules: nil,
+                                                             componentAction: nil)
         let notifyChange = PassthroughSubject<String, Never>()
         let performAction = PassthroughSubject<UIComponentModel, Never>()
-        let componentModel = TextFieldComponentModel(key: "",
-                                                     uiComponent: .textField,
-                                                     text: "",
-                                                     placeholder: "Placeholder",
+        let componentModel = TextFieldComponentModel(componentDataModel: componentDataModel,
                                                      notifyChange: notifyChange,
                                                      performAction: performAction)
         
