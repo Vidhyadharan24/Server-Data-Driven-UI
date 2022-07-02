@@ -28,7 +28,7 @@ class UIBaseInputComponentModel: UIBaseComponentModel, UIInputComponentModel {
          rules: ComponentStateRule? = nil,
          validations: [Validation]? = nil,
          componentAction: ComponentAction? = nil,
-         notifyChange: ObservableObjectPublisher,
+         notifyChange: PassthroughSubject<String, Never>,
          performAction: PassthroughSubject<UIActionComponentModel, Never>) {
         self.validations = validations
         self.isMandatory = validations?.filter {

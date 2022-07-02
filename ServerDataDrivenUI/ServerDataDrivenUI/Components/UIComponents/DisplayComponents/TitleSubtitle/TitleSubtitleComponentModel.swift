@@ -26,7 +26,7 @@ class TitleSubtitleComponentModel: UIBaseComponentModel {
          componentAction: ComponentAction? = nil,
          title: String,
          subtitles: [String],
-         notifyChange: ObservableObjectPublisher,
+         notifyChange: PassthroughSubject<String, Never>,
          performAction: PassthroughSubject<UIActionComponentModel, Never>) {
         self.title = title
         self.subtitles = subtitles

@@ -17,11 +17,14 @@ protocol UIComponentModel: AnyObject {
     var isDisabled: Bool { get set }
     var isLoading: Bool { get set }
 
+    var actionPerformed: Bool { get set }
+    var componentAction: ComponentAction? { get }
     var componentStateRules: ComponentStateRule? { get }
 
-    var notifyChange: ObservableObjectPublisher { get }
+    var notifyChange: PassthroughSubject<String, Never> { get }
     var performAction: PassthroughSubject<UIActionComponentModel, Never> { get }
-    
+
+    func resetIfNeeded(onChange: String) -> Bool
     func updateState(currentValues: [String: Set<AnyCodable>])
     
     var data: [String: Set<AnyCodable>] { get }

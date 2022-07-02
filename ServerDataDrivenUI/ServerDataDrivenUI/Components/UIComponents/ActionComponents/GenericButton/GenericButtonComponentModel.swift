@@ -39,7 +39,7 @@ class GenericButtonComponentModel: UIBaseActionComponentModel {
          validations: [Validation] = [],
          componentAction: ComponentAction? = nil,
          title: String,
-         notifyChange: ObservableObjectPublisher,
+         notifyChange: PassthroughSubject<String, Never>,
          performAction: PassthroughSubject<UIActionComponentModel, Never>) {
 
         self.title = title

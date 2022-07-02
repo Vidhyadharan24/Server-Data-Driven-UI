@@ -71,7 +71,10 @@
               "loading": [
                 true
               ]
-            }
+            },
+            "resetOnChange": [
+                "phone_number"
+            ]
           },
           "component_action": {
             "validated_api_call": {

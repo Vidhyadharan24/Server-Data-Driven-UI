@@ -23,12 +23,13 @@ class UIBaseComponentModel: UIComponentModel, ObservableObject {
 
     var componentStateRules: ComponentStateRule?
     var componentAction: ComponentAction? = nil
+    var actionPerformed: Bool = false
 
     var data: [String: Set<AnyCodable>] {
         return [key: []]
     }
 
-    let notifyChange: ObservableObjectPublisher
+    let notifyChange: PassthroughSubject<String, Never>
     let performAction: PassthroughSubject<UIActionComponentModel, Never>
         
     var cancellableSet = Set<AnyCancellable>()
@@ -36,13 +37,21 @@ class UIBaseComponentModel: UIComponentModel, ObservableObject {
     init(key: String,
          rules: ComponentStateRule?,
          componentAction: ComponentAction? = nil,
-         notifyChange: ObservableObjectPublisher,
+         notifyChange: PassthroughSubject<String, Never>,
          performAction: PassthroughSubject<UIActionComponentModel, Never>) {
         self.key = key
         self.componentStateRules = rules
         self.componentAction = componentAction
         self.notifyChange = notifyChange
         self.performAction = performAction
+    }
+    
+    func resetIfNeeded(onChange: String) -> Bool {
+        guard let shouldReset = componentStateRules?.resetOnChange?.contains(onChange),
+              shouldReset else { return false }
+        self.actionPerformed = false
+        self.notifyChange.send(key)
+        return true
     }
     
     func actionCompleted(success: Bool) {

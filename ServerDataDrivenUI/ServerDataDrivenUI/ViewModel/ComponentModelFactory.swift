@@ -15,7 +15,7 @@ struct ComponentModelFactory {
 
     
     static func componentModel(for dataModel: UIComponentDataModel,
-                               notifyChange: ObservableObjectPublisher,
+                               notifyChange: PassthroughSubject<String, Never>,
                                performAction: PassthroughSubject<UIActionComponentModel, Never>) -> UIComponentModel {
         switch dataModel {
         case .phoneNumber(let dataModel):
@@ -54,7 +54,7 @@ struct ComponentModelFactory {
     }
     
     static func componentModels(for dataModels: [UIComponentDataModel],
-                                 notifyChange: ObservableObjectPublisher,
+                                 notifyChange: PassthroughSubject<String, Never>,
                                 performAction: PassthroughSubject<UIActionComponentModel, Never>) -> [UIComponentModel] {
         var componentModels = [UIComponentModel]()
         

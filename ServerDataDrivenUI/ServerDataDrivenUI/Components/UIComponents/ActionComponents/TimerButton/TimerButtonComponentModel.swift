@@ -50,7 +50,7 @@ class TimerButtonComponentModel: UIBaseActionComponentModel {
          title: String,
          componentAction: ComponentAction? = nil,
          countDownDuration: Int,
-         notifyChange: ObservableObjectPublisher,
+         notifyChange: PassthroughSubject<String, Never>,
          performAction: PassthroughSubject<UIActionComponentModel, Never>) {
 
         self.title = title
@@ -79,6 +79,12 @@ class TimerButtonComponentModel: UIBaseActionComponentModel {
         
         self.isLoading = true
         self.performAction.send(self)
+    }
+    
+    override func resetIfNeeded(onChange: String) -> Bool {
+        guard super.resetIfNeeded(onChange: onChange) else { return false }
+        self.resetTimer()
+        return true
     }
     
     override func actionCompleted(success: Bool) {

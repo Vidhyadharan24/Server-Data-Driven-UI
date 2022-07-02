@@ -8,8 +8,6 @@
 import Foundation
 
 class UIBaseActionComponentModel: UIBaseComponentModel, UIActionComponentModel {
-    var actionPerformed: Bool = false
-
     override func actionCompleted(success: Bool) {
         super.actionCompleted(success: success)
         self.actionPerformed = success

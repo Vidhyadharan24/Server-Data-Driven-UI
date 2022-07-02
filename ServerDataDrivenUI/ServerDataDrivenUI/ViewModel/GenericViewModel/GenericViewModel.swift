@@ -12,7 +12,7 @@ import AnyCodable
 class GenericViewModel: GenericViewModelProtocol {
     let uiComponentModels: [UIComponentModel]
     
-    let notifyChange = ObservableObjectPublisher()
+    let notifyChange = PassthroughSubject<String, Never>()
     var performAction = PassthroughSubject<UIActionComponentModel, Never>()
     
     let repo = GenericViewRepo()
@@ -30,7 +30,8 @@ class GenericViewModel: GenericViewModelProtocol {
     }
     
     func setUpBindings() {
-        notifyChange.sink { [weak self] _ in
+        notifyChange.sink { [weak self] componentKey in
+            self?.uiComponentModels.forEach { $0.resetIfNeeded(onChange: componentKey) }
             self?.updateViewState()
             self?.objectWillChange.send()
         }.store(in: &cancellableSet)

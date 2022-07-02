@@ -38,7 +38,7 @@ class PhoneFieldComponentModel: UIBaseInputComponentModel {
          countries: [Country],
          selectedCountryCode: String,
          phoneNumber: String = "",
-         notifyChange: ObservableObjectPublisher,
+         notifyChange: PassthroughSubject<String, Never>,
          performAction: PassthroughSubject<UIActionComponentModel, Never>) {
         self.countries = countries
         self.selectedCountryCode = selectedCountryCode
@@ -64,8 +64,9 @@ class PhoneFieldComponentModel: UIBaseInputComponentModel {
         $phoneNumber
             .dropFirst()
             .sink {[weak self] text in
-                self?.validatePhoneNo(text: text)
-                self?.notifyChange.send()
+                guard let self = self else { return }
+                self.validatePhoneNo(text: text)
+                self.notifyChange.send(self.key)
             }.store(in: &cancellableSet)
     }
     

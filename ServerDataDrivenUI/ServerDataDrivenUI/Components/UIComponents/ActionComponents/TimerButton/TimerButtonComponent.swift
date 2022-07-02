@@ -39,7 +39,7 @@ struct TimerButtonComponent: View {
 
 struct TimerButton_Previews: PreviewProvider {
     static var previews: some View {
-        let notifyChange = ObservableObjectPublisher()
+        let notifyChange = PassthroughSubject<String, Never>()
         let performAction = PassthroughSubject<UIActionComponentModel, Never>()
         let componentModel = TimerButtonComponentModel(key: "resend_otp",
                                                        title: "Resend OTP",

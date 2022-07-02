@@ -39,7 +39,7 @@ class TextFieldComponentModel: UIBaseInputComponentModel {
          componentAction: ComponentAction? = nil,
          text: String,
          placeholder: String,
-         notifyChange: ObservableObjectPublisher,
+         notifyChange: PassthroughSubject<String, Never>,
          performAction: PassthroughSubject<UIActionComponentModel, Never>) {
         self.text = text
         self.placeholder = placeholder
@@ -56,8 +56,9 @@ class TextFieldComponentModel: UIBaseInputComponentModel {
     
     func setUpBindings() {
         $text.sink { [weak self] text in
-            self?.validate(text: text)
-            self?.notifyChange.send()
+            guard let self = self else { return }
+            self.validate(text: text)
+            self.notifyChange.send(self.key)
         }.store(in: &cancellableSet)
     }
 }
