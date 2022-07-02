@@ -17,6 +17,7 @@ protocol UIInputComponentModel: UIComponentModel, Validatable {
     var keyboardType: UIKeyboardType { get }
     
     var isValid: String? { get }
+    var isMandatory: Bool { get }
 }
 
 extension UIInputComponentModel {
@@ -32,6 +33,10 @@ extension UIInputComponentModel {
     }
     
     @discardableResult func validate(text: String) -> String? {
+        if !isMandatory, text.count == 0 {
+            return true
+        }
+        
         if let validations = validations {
             for validation in validations {
                 guard let errorMessage = validation.validationFunction(text) else { continue }

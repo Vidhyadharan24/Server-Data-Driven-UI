@@ -10,11 +10,12 @@ import Combine
 import AnyCodable
 import SwiftUI
 
-class UIBaseInputComponentModel: UIBaseComponentModel, UIInputComponentModel {        
+class UIBaseInputComponentModel: UIBaseComponentModel, UIInputComponentModel {
     var errorMessage: String?
     
     var validations: [Validation]?
     
+    var isMandatory: Bool
     var isValid: String? {
         self.validate(text: "")
     }
@@ -29,6 +30,12 @@ class UIBaseInputComponentModel: UIBaseComponentModel, UIInputComponentModel {
          notifyChange: ObservableObjectPublisher,
          performAction: PassthroughSubject<ComponentAction, Never>) {
         self.validations = validations
+        self.isMandatory = validations?.filter {
+            if case .nonEmpty = $0 {
+                return true
+            }
+            return false
+        }.count ?? 0 > 0
         
         super.init(key: key,
                    rules: rules,
